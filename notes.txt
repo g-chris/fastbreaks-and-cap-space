@@ -1,0 +1,22 @@
+
+
+
+
+
+
+Overall Score   Salary Cap 	Player Level    Rarity
+48 - 60	        30 - 40%	Superstars	    2.5%
+36 - 47	        25 - 35%	All-Stars	    10%
+24 - 35	        20 - 30%	Starters	    30%
+12 - 23	        15 - 25%	Role-Players	50%
+12 - 40	         5 - 20%	Rookies	        7.5%
+
+
+
+
+Position	    Buffs	    Debuffs
+Point Guard 	DEX, INT	CON, DEF
+Shooting Guard	SHOT, DEX	INT, DEF
+Small Forward	SHOT, CON	INT, DEX
+Power Forward	STR, DEF	DEX, CON
+Center	        STR, DEF	DEX, SHOT
