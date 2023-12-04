@@ -1,4 +1,21 @@
+Attributes:
+    Strength (STR):
+        Represents physical power, ability to power through defenders, and effectiveness in the post.
 
+    Dexterity (DEX):
+        Measures agility, quickness, and ability to make precise movements on the court.
+
+    Constitution (CON):
+        Reflects a player's endurance, stamina, and resistance to fatigue.
+
+    Intelligence (INT):
+        Represents a player's basketball IQ, understanding of the game, and ability to make strategic decisions.
+
+    Shooting (SHOT):
+        Specifically focuses on a player's ability to make shots, covering accuracy, shooting range, and overall scoring prowess.
+
+    Defense (DEF):
+        Specifically measures a player's defensive skills, including blocking shots, stealing the ball, and overall effectiveness in preventing opponents from scoring.
 
 
 
@@ -13,7 +30,7 @@ Overall Score   Salary Cap 	Player Level    Rarity
 
 
 
-
+Class Table
 Position	    Buffs	    Debuffs
 Point Guard 	DEX, INT	CON, DEF
 Shooting Guard	SHOT, DEX	INT, DEF
