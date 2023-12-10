@@ -17,8 +17,9 @@ Attributes:
     Defense (DEF):
         Specifically measures a player's defensive skills, including blocking shots, stealing the ball, and overall effectiveness in preventing opponents from scoring.
 
-
-
+    Guards: 50%
+    Forwards: 35%
+    Centers: 15%
 
 
 Overall Score   Salary Cap 	Player Level    Rarity
