@@ -1,8 +1,13 @@
 import random
+import csv
+from names import first_names, last_names, nick_names
 
 class Player:
-    def __init__(self, name, position, player_level, overall_score, player_salary, attributes):
-        self.name = name
+    def __init__(self, player_id, first_name, last_name, nick_name, position, player_level, overall_score, player_salary, attributes):
+        self.player_id = player_id
+        self.first_name = first_name
+        self.last_name = last_name
+        self.nick_name = nick_name
         self.position = position
         self.player_level = player_level
         self.overall_score = overall_score
@@ -66,9 +71,9 @@ def assign_player_level(random_number):
     
 def generate_salary(player_level):
     if player_level == 'Superstar':
-        return random.randint(25, 40)
+        return random.randint(20, 40)
     elif player_level == 'All-Star':
-        return random.randint(10, 25)
+        return random.randint(10, 30)
     elif player_level == 'Starter':
         return random.randint(8, 13)
     elif player_level == 'Role-Player':
@@ -80,7 +85,9 @@ def generate_roster(num_players):
     roster = []
 
     for player_num in range(1, num_players + 1):
-        name = f'Player {player_num}'
+        player_id = player_num
+        first_name = f'{random.choice(first_names)}'
+        last_name = f'{random.choice(last_names)}'
         random_number_level = random.randint(1, 100)
         player_level = assign_player_level(random_number_level)
         random_number_position = random.randint(1, 100)
@@ -88,14 +95,18 @@ def generate_roster(num_players):
         attributes = generate_player_attributes(player_level)
         overall_score = sum(attributes.values())
         player_salary = generate_salary(player_level)
-        player = Player(name, position, player_level, overall_score, player_salary, attributes)
+        nick_name_number = random.randint(1, 250)
+        if nick_name_number > 247:
+            nick_name = f'"{random.choice(nick_names)}" '
+        else: nick_name = ""
+        player = Player(player_id, first_name, last_name, nick_name, position, player_level, overall_score, player_salary, attributes)
         roster.append(player)
 
     return roster
 
 def display_roster(roster):
     for player in roster:
-        print(f"{player.name} - {player.position} - {player.player_level} - Overall Level: {player.overall_score} - {player.player_salary}% Salary Cap Hit")
+        print(f" #{player.player_id} - {player.first_name} {player.nick_name}{player.last_name} - {player.position} - {player.player_level} - Overall Level: {player.overall_score} - {player.player_salary}% Salary Cap Hit")
         print("Attributes:", player.attributes)
         print()
 
@@ -131,6 +142,29 @@ def display_roster(roster):
     average_overall_level = sum(player.overall_score for player in roster) / len(roster)
     print(f"Average Overall Level: {average_overall_level}")
 
+def export_to_csv(roster):
+    csv_columns = ['Player_ID', 'First_Name', 'Last_Name', 'Nick_Name', 'Position', 'Player_Level', 'Overall_Score', 'Player_Salary']
+    csv_file = "roster.csv"
+    
+    try:
+        with open(csv_file, 'w', newline='') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+            writer.writeheader()
+            for player in roster:
+                writer.writerow({
+                    'Player_ID': player.player_id,
+                    'First_Name': player.first_name,
+                    'Last_Name': player.last_name,
+                    'Nick_Name': player.nick_name,
+                    'Position': player.position,
+                    'Player_Level': player.player_level,
+                    'Overall_Score': player.overall_score,
+                    'Player_Salary': player.player_salary
+                })
+        print(f"\nRoster data exported to {csv_file}")
+    except Exception as e:
+        print("Error writing to CSV:", e)
 
 roster = generate_roster(400)
 display_roster(roster)
+export_to_csv(roster)
