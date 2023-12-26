@@ -81,7 +81,7 @@ def generate_salary(player_level):
     else:  # 'Rookie'
         return random.randint(2, 7)
 
-def generate_roster(num_players):
+def generate_roster(num_players, type):
     roster = []
 
     for player_num in range(1, num_players + 1):
@@ -89,7 +89,10 @@ def generate_roster(num_players):
         first_name = f'{random.choice(first_names)}'
         last_name = f'{random.choice(last_names)}'
         random_number_level = random.randint(1, 100)
-        player_level = assign_player_level(random_number_level)
+        if type == 'rookies':
+            player_level = 'Rookie'
+        else:
+            player_level = assign_player_level(random_number_level)
         random_number_position = random.randint(1, 100)
         position = assign_position(random_number_position)
         attributes = generate_player_attributes(player_level)
@@ -165,6 +168,6 @@ def export_to_csv(roster):
     except Exception as e:
         print("Error writing to CSV:", e)
 
-roster = generate_roster(400)
+roster = generate_roster(400, 'regular')
 display_roster(roster)
 export_to_csv(roster)

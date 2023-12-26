@@ -1,401 +1,54 @@
 Player_ID,First_Name,Last_Name,Nick_Name,Position,Player_Level,Overall_Score,Player_Salary
-1,Herbert,Bight,,Shooting Guard,Role-Player,12,6
-2,Nevaeh,Krilltown,,Shooting Guard,Role-Player,13,8
-3,Julia,Scallopton,,Power Forward,Rookie,34,5
-4,Martha,Montepulciano,,Center,Starter,28,12
-5,Grace,Slope,,Point Guard,Role-Player,21,9
-6,Jackson,Crabtree,,Small Forward,Starter,25,13
-7,Warren,Starfishworth,,Shooting Guard,Starter,27,12
-8,Natalie,Krillworthy,,Point Guard,All-Star,43,13
-9,Ulysses,Crabtree,,Small Forward,Role-Player,20,9
-10,Laura,Vermentino,,Point Guard,Role-Player,12,4
-11,Gerald,Clamford,,Small Forward,Starter,26,11
-12,Barbara,Reef,,Point Guard,Rookie,19,3
-13,Ava,Starfishworth,,Shooting Guard,Role-Player,23,5
-14,Aiden,Snailman,,Point Guard,Role-Player,22,2
-15,George,Mound,,Shooting Guard,Starter,29,13
-16,Lou,Musselsworth,,Point Guard,Starter,28,11
-17,John,Oysterburg,,Point Guard,Role-Player,17,7
-18,Kai,Viognier,,Shooting Guard,Starter,34,8
-19,Caleb,Brook,,Small Forward,Rookie,36,5
-20,Avery,Ocean,,Point Guard,Starter,34,8
-21,Zoe,Merlot,,Small Forward,Role-Player,18,1
-22,Lou,Slope,,Shooting Guard,Role-Player,15,6
-23,Dolley,Krilltown,,Point Guard,Role-Player,16,4
-24,Gabriel,Gulf,,Small Forward,Starter,27,10
-25,Lyndon,Bassborough,,Shooting Guard,Starter,34,13
-26,Bill,Estuary,,Shooting Guard,Role-Player,22,7
-27,Ryder,Lobstertown,,Point Guard,Starter,26,10
-28,Henry,Musselsburg,,Shooting Guard,Role-Player,15,1
-29,James,Zinfandel,,Point Guard,Starter,27,12
-30,Eli,Ridge,,Small Forward,Starter,26,12
-31,Scarlet,Marsanne,,Point Guard,Role-Player,17,3
-32,Samuel,Clamford,,Shooting Guard,Superstar,48,29
-33,Lily,Squidsworth,,Shooting Guard,All-Star,39,20
-34,Scarlet,Musselsworth,,Power Forward,All-Star,41,20
-35,Hazel,Channel,,Point Guard,Starter,28,13
-36,Elizabeth,Tannat,,Point Guard,Role-Player,17,4
-37,Olivia,Marsh,,Center,Starter,33,11
-38,Jackson,Pond,,Point Guard,Role-Player,23,3
-39,Michelle,Pinot Noir,,Small Forward,Starter,27,11
-40,Frances,Ridge,,Shooting Guard,Role-Player,20,2
-41,Emily,Lobstertown,,Power Forward,Role-Player,15,3
-42,Rutherford,Roussanne,,Small Forward,Role-Player,13,3
-43,Sophia,Shellsworth,,Shooting Guard,Role-Player,14,6
-44,James,Shrimpsburg,,Point Guard,Role-Player,13,1
-45,Franklin,Bayou,,Point Guard,Role-Player,13,8
-46,Jack,Strait,,Center,Role-Player,21,4
-47,Grace,Barnacleson,,Center,All-Star,46,21
-48,Grayson,Clamsville,,Power Forward,All-Star,43,19
-49,Rutherford,Marsanne,,Shooting Guard,Starter,25,12
-50,Rosalynn,Shrimpsburg,,Shooting Guard,Starter,30,12
-51,Helen,Shoals,,Small Forward,All-Star,43,10
-52,Henry,Squidworthy,,Small Forward,Role-Player,12,6
-53,Calvin,Barnacleton,,Point Guard,Starter,26,11
-54,Dwight,Lagoon,,Shooting Guard,All-Star,38,14
-55,Luna,Nebbiolo,,Center,Rookie,33,3
-56,Eliza,Clamworthy,,Small Forward,Role-Player,15,2
-57,Penelope,Quay,,Center,Starter,27,8
-58,Autumn,Isle,,Point Guard,Role-Player,16,1
-59,Riley,Sangiovese,,Shooting Guard,Starter,32,13
-60,Harriet,Musselworth,,Shooting Guard,Role-Player,13,9
-61,Madison,Mound,,Point Guard,Role-Player,16,7
-62,Woodrow,Mere,,Shooting Guard,Starter,34,13
-63,Theodore,Whaleson,,Power Forward,All-Star,37,10
-64,Gabriel,Zinfandel,,Center,All-Star,37,16
-65,Abigail,Shrimpsworth,,Point Guard,All-Star,42,17
-66,Amelia,Whaleman,,Small Forward,Starter,24,13
-67,Elizabeth,Reach,,Small Forward,Role-Player,13,2
-68,Joseph,Shoals,,Small Forward,Role-Player,17,9
-69,James,Krabbsworth,,Center,Starter,32,12
-70,Andrew,Lobstertown,,Small Forward,Role-Player,23,7
-71,Avery,Bight,,Small Forward,Role-Player,13,9
-72,Chester,Whaleton,,Small Forward,Starter,32,13
-73,Zachary,Shrimpsburg,,Small Forward,Starter,30,13
-74,Franklin,Prawnsworth,,Shooting Guard,Role-Player,16,7
-75,Amelia,Clamsville,,Point Guard,Role-Player,22,3
-76,Grace,Viognier,,Shooting Guard,Role-Player,16,3
-77,Joseph,Delta,,Center,Role-Player,13,1
-78,James,Snailworthy,,Small Forward,Role-Player,12,6
-79,Chloe,Clamsworth,,Point Guard,Role-Player,19,6
-80,Florence,Starfishworth,,Point Guard,Starter,30,11
-81,Emily,Slope,,Shooting Guard,Role-Player,17,1
-82,Grayson,Snailworthy,,Center,Role-Player,17,6
-83,James,Squidwardson,,Point Guard,Starter,33,13
-84,Letitia,Dunes,,Shooting Guard,Role-Player,19,5
-85,Julia,Primitivo,,Shooting Guard,Role-Player,21,6
-86,Harry,Musselsworth,,Power Forward,Role-Player,21,2
-87,Isabella,Vale,,Center,Role-Player,17,5
-88,James,Musselsworth,,Small Forward,Starter,34,8
-89,Florence,Ridge,,Center,Role-Player,12,6
-90,Grace,Tannat,,Power Forward,Role-Player,16,7
-91,Faith,Lobsterburg,,Shooting Guard,Rookie,22,6
-92,Theodore,Clamsville,,Small Forward,Role-Player,20,1
-93,Angelica,Rivers,,Center,Rookie,16,2
-94,Nancy,Mound,,Shooting Guard,Starter,33,9
-95,Rutherford,Lobsterville,,Power Forward,Starter,30,8
-96,Peyton,Ridge,,Power Forward,Starter,33,11
-97,Grace,Pines,,Point Guard,Role-Player,13,6
-98,Liam,Musselburg,,Power Forward,Role-Player,21,9
-99,Bill,Barnacleburg,,Shooting Guard,Starter,25,10
-100,Grace,Bay,,Small Forward,Starter,27,11
-101,Jackson,Krabbington,,Shooting Guard,Starter,28,10
-102,John,Stream,,Power Forward,All-Star,39,25
-103,Lucas,Cove,,Small Forward,All-Star,45,18
-104,Leo,Brook,,Power Forward,Role-Player,17,8
-105,Evelyn,Brook,,Small Forward,Role-Player,17,7
-106,Florence,Pines,,Shooting Guard,Role-Player,21,3
-107,Mary,Whalesburg,,Shooting Guard,Superstar,59,31
-108,Edith,Shoals,,Point Guard,Role-Player,17,6
-109,Grace,Canal,,Point Guard,Role-Player,13,1
-110,William,Fiano,,Point Guard,Role-Player,19,9
-111,James,Starfishman,,Shooting Guard,Starter,27,12
-112,Nellie,Crest,,Power Forward,Role-Player,20,4
-113,Florence,Malbec,,Small Forward,Starter,26,12
-114,Lucy,Dunes,,Point Guard,Role-Player,13,3
-115,Grover,Aligoté,,Small Forward,Starter,25,11
-116,Autumn,Shellsworth,,Center,Starter,35,10
-117,Ava,Knoll,,Shooting Guard,Role-Player,19,8
-118,Easton,Corvina,,Shooting Guard,Role-Player,21,4
-119,John,Sangiovese,,Shooting Guard,All-Star,43,15
-120,William,Stream,,Small Forward,Role-Player,20,5
-121,Mateo,Isle,,Point Guard,Starter,35,12
-122,John,Pines,,Point Guard,Role-Player,17,1
-123,Mason,Lobsterman,,Power Forward,Starter,28,11
-124,Madeline,Krilltown,,Small Forward,All-Star,46,23
-125,Eli,Brook,,Point Guard,Role-Player,16,7
-126,Harry,Verdejo,,Small Forward,Role-Player,21,8
-127,Grace,Glen,,Power Forward,Role-Player,22,1
-128,Noah,Head,,Point Guard,Role-Player,20,7
-129,Emilia,Grenache,,Point Guard,Role-Player,15,1
-130,Grayson,Ridge,,Point Guard,Superstar,51,33
-131,Edith,Pinot Noir,,Point Guard,Role-Player,15,4
-132,Lucas,Squidworth,,Center,All-Star,46,23
-133,Jackson,Terrace,,Power Forward,Role-Player,20,4
-134,Jane,Whaleman,,Center,Role-Player,12,9
-135,Elijah,Krabbington,,Power Forward,Role-Player,19,4
-136,Peyton,Estuary,,Power Forward,All-Star,44,21
-137,Leo,Whelkington,,Power Forward,Role-Player,23,6
-138,Martha,Stream,,Shooting Guard,Starter,27,11
-139,Layla,Brook,,Small Forward,Starter,24,9
-140,Emilia,Pools,,Small Forward,Role-Player,18,5
-141,Addison,Stream,,Center,Role-Player,18,2
-142,Lily,Harbor,,Center,Role-Player,21,4
-143,Easton,Springs,,Shooting Guard,Starter,32,9
-144,Ronald,Cove,,Shooting Guard,Role-Player,16,7
-145,Warren,Clamsworth,,Small Forward,Role-Player,20,5
-146,Emilia,Canal,,Point Guard,Starter,31,12
-147,Logan,Inlet,,Power Forward,Starter,25,8
-148,Louisa,Lobstertown,,Small Forward,Starter,29,13
-149,James,Rondinella,,Shooting Guard,Rookie,30,3
-150,Ella,Squidwardson,,Center,Role-Player,20,7
-151,Letitia,Cove,,Shooting Guard,Role-Player,21,1
-152,Madison,Petite Sirah,,Small Forward,Role-Player,14,3
-153,Grace,Reef,,Small Forward,Role-Player,14,1
-154,Ellie,Whaleman,,Point Guard,Starter,35,9
-155,Gerald,Reef,,Shooting Guard,Starter,34,12
-156,Eli,Shrimpsburg,,Small Forward,Role-Player,21,6
-157,Natalie,Starfishman,,Shooting Guard,Starter,35,9
-158,John,Bassington,,Shooting Guard,Starter,26,9
-159,Scarlet,Barnacleburg,,Shooting Guard,Superstar,56,35
-160,Eli,Tempranillo,,Point Guard,Role-Player,13,4
-161,Grace,Shoals,,Point Guard,Starter,30,13
-162,Lou,Vermentino,,Point Guard,All-Star,37,16
-163,Caden,Krillworthy,,Small Forward,Role-Player,15,7
-164,Angelica,Fjord,,Shooting Guard,Role-Player,23,7
-165,Jane,Mound,,Small Forward,Role-Player,14,4
-166,Ava,Musselburg,,Point Guard,Starter,32,11
-167,Abigail,Mere,,Shooting Guard,Starter,31,8
-168,Sarah,Ridge,,Small Forward,Starter,33,10
-169,Ethan,Shrimpton,,Shooting Guard,Starter,24,10
-170,Madison,Musselburg,,Small Forward,Role-Player,15,9
-171,Sophia,Gewürztraminer,,Point Guard,Starter,30,11
-172,Peyton,Aglianico,,Center,Role-Player,13,1
-173,Harry,Lobsterburg,,Center,Starter,24,12
-174,John,Wave,,Power Forward,All-Star,43,12
-175,Caleb,Clamworthy,,Power Forward,Role-Player,19,8
-176,Bella,Bight,,Center,Role-Player,22,3
-177,Helen,Slope,,Point Guard,Starter,30,11
-178,Ulysses,Barnacleton,,Shooting Guard,Role-Player,20,1
-179,Eli,Oysterville,,Shooting Guard,Starter,27,13
-180,Florence,Reach,,Shooting Guard,All-Star,38,16
-181,Grover,Shelltown,,Small Forward,Role-Player,13,1
-182,Ryder,Shellsworth,,Small Forward,All-Star,42,20
-183,Frances,Fjord,,Point Guard,All-Star,39,13
-184,Lucas,Fiano,,Point Guard,Role-Player,12,9
-185,Lucy,Shoals,,Shooting Guard,Starter,27,9
-186,Lou,Barnacleton,,Point Guard,Rookie,27,4
-187,Margaret,Bassington,,Shooting Guard,Role-Player,20,1
-188,Letitia,Shellington,,Small Forward,All-Star,38,17
-189,Martha,Wells,,Shooting Guard,All-Star,39,19
-190,Edith,Shoal,,Point Guard,Role-Player,17,7
-191,Caleb,Oysterville,,Small Forward,Role-Player,19,7
-192,Nellie,Musselsworth,,Small Forward,Role-Player,21,7
-193,Sarah,Whalesburg,,Shooting Guard,Role-Player,23,1
-194,Ronald,Roussanne,,Point Guard,Rookie,36,6
-195,Bella,Tides,,Center,All-Star,41,12
-196,Sofia,Shrimpworthy,,Shooting Guard,Role-Player,20,7
-197,Rosalynn,Merlot,,Point Guard,Role-Player,19,5
-198,Rosalynn,Moscato,,Small Forward,Rookie,38,7
-199,Evelyn,Zinfandel,,Shooting Guard,Starter,35,13
-200,Edith,Semillon,,Point Guard,Role-Player,12,9
-201,Helen,Snailton,,Shooting Guard,Starter,29,9
-202,Natalie,Clamsville,,Small Forward,Role-Player,23,1
-203,Eliza,Falls,,Center,Role-Player,16,7
-204,Edith,Banks,,Point Guard,Role-Player,17,4
-205,Woodrow,Petite Sirah,,Point Guard,Role-Player,17,1
-206,Scarlett,Primitivo,,Point Guard,Starter,28,9
-207,Ellie,Shrimptown,,Power Forward,Role-Player,15,1
-208,Harper,Rondinella,,Small Forward,Role-Player,14,1
-209,Noah,Bay,,Power Forward,Starter,34,8
-210,Theodore,Malbec,,Point Guard,Role-Player,21,5
-211,Grace,Strait,,Power Forward,Role-Player,23,5
-212,Grace,Whalesworth,,Power Forward,Role-Player,19,3
-213,Louisa,Seaway,,Center,Role-Player,17,5
-214,Abraham,Barnacleman,,Point Guard,Starter,31,11
-215,Grace,Negroamaro,,Point Guard,Role-Player,12,6
-216,James,Rondinella,,Small Forward,Starter,35,12
-217,Zoey,Knoll,,Shooting Guard,Role-Player,21,5
-218,Lyndon,Semillon,,Center,Starter,32,8
-219,Aria,Krillworthy,,Shooting Guard,Starter,25,9
-220,Aria,Clamsville,,Point Guard,Starter,25,11
-221,Nancy,Head,,Point Guard,Role-Player,17,8
-222,Dolley,Crest,,Shooting Guard,Role-Player,14,2
-223,Michelle,Primitivo,,Point Guard,All-Star,37,10
-224,Layla,Primitivo,,Power Forward,Role-Player,14,9
-225,Jane,Knoll,,Center,Starter,31,12
-226,Addison,Barnacleton,,Power Forward,Superstar,59,30
-227,John,Mere,,Center,Role-Player,13,3
-228,Scarlett,Fjord,,Shooting Guard,Starter,34,8
-229,Sofia,Musselsworth,,Shooting Guard,Starter,29,13
-230,Grover,Shrimpsworth,"""Guard Dog"" ",Small Forward,Role-Player,23,4
-231,Ella,Whalesburg,,Center,Superstar,51,29
-232,Leo,Mere,,Shooting Guard,Starter,29,8
-233,James,Crabtree,,Shooting Guard,Role-Player,17,2
-234,Grace,Oysterville,,Point Guard,Starter,25,12
-235,George,Glen,,Power Forward,Role-Player,23,4
-236,Elijah,Knoll,,Point Guard,Starter,29,11
-237,Gerald,Pools,,Point Guard,Role-Player,12,9
-238,Grace,Mound,,Small Forward,Starter,28,9
-239,Ava,Pools,,Small Forward,Starter,27,9
-240,Bill,Harbor,,Shooting Guard,Starter,26,11
-241,Nellie,Rondinella,,Power Forward,Role-Player,19,9
-242,Kimberly,Squidworthy,,Shooting Guard,All-Star,40,17
-243,James,Ridge,,Point Guard,Starter,31,13
-244,Sophia,Pools,,Point Guard,Role-Player,19,2
-245,Florence,Semillon,,Center,Role-Player,17,8
-246,Andrew,Summit,,Power Forward,Starter,35,10
-247,John,Fiano,,Small Forward,Role-Player,23,4
-248,Jayden,Primitivo,,Center,Starter,25,13
-249,Aria,Krilltown,,Center,Starter,33,13
-250,Levi,Crest,,Center,Role-Player,23,1
-251,Frances,Whaleman,,Small Forward,Starter,33,10
-252,Louisa,Ridge,,Center,Starter,27,12
-253,Caroline,Pond,,Power Forward,All-Star,41,24
-254,James,Cove,,Power Forward,Starter,32,11
-255,Noah,Shoal,,Shooting Guard,Role-Player,20,7
-256,Abigail,Prawlington,,Point Guard,Starter,31,12
-257,Lou,Beach,,Shooting Guard,Starter,30,8
-258,Emily,Prawnsworth,,Small Forward,Role-Player,13,7
-259,Elizabeth,Shrimpton,,Center,Starter,25,12
-260,Edith,Nebbiolo,,Point Guard,Starter,35,11
-261,Gerald,Clamford,,Power Forward,Superstar,50,38
-262,Elizabeth,Shiraz,,Point Guard,Role-Player,22,9
-263,Frances,Falls,,Power Forward,All-Star,37,20
-264,Lucy,Krilltown,,Point Guard,Starter,34,13
-265,Riley,Oysterville,,Power Forward,Starter,25,13
-266,Martha,Pools,,Shooting Guard,Role-Player,22,6
-267,Isabella,Squidworth,,Small Forward,Starter,29,8
-268,John,Crabbington,,Center,Starter,29,12
-269,Harper,Prawlington,,Shooting Guard,Starter,24,9
-270,Camila,Springs,,Power Forward,Superstar,59,34
-271,Warren,Cove,,Point Guard,Role-Player,23,7
-272,Ella,Chenin Blanc,,Point Guard,Starter,32,8
-273,Lucas,Starfishborough,,Center,Role-Player,15,9
-274,Sebastian,Ford,,Small Forward,Starter,33,8
-275,James,Slope,,Shooting Guard,Role-Player,21,8
-276,Caden,Chardonnay,,Shooting Guard,Role-Player,15,4
-277,Alexander,Clamford,,Center,Role-Player,16,1
-278,Rosalynn,Springs,,Small Forward,Role-Player,14,8
-279,Andrew,Shoals,,Point Guard,Role-Player,13,4
-280,Benjamin,Krilltown,,Small Forward,Role-Player,17,9
-281,Abraham,Musselworth,,Point Guard,Role-Player,20,6
-282,Alexander,Oysterson,,Small Forward,All-Star,44,20
-283,Penelope,Crabtree,,Small Forward,All-Star,46,14
-284,Lou,Musselburg,,Point Guard,Role-Player,21,5
-285,Bill,Cabernet Franc,,Center,All-Star,44,21
-286,Grace,Oysterville,,Point Guard,Role-Player,13,2
-287,Kai,Snailton,,Shooting Guard,All-Star,47,21
-288,Nancy,Syrah,,Point Guard,Role-Player,20,9
-289,Isabella,Sauvignon Blanc,,Power Forward,Starter,30,9
-290,Brielle,Musselburg,,Power Forward,Role-Player,18,7
-291,Mila,Barnacleton,,Point Guard,Starter,35,10
-292,Rosalynn,Isles,,Small Forward,All-Star,40,25
-293,John,Falls,,Power Forward,All-Star,41,17
-294,Richard,Shore,,Small Forward,Role-Player,21,2
-295,Madeline,Bassington,,Power Forward,Role-Player,21,8
-296,Zachary,Falls,,Power Forward,All-Star,39,13
-297,Caroline,Snailsworth,,Point Guard,Starter,29,11
-298,Ronald,Cabernet Sauvignon,"""Inferno"" ",Shooting Guard,All-Star,43,23
-299,Warren,Whelkington,,Small Forward,Role-Player,20,6
-300,Sofia,Shelltown,,Power Forward,Role-Player,19,5
-301,Camila,Shrimpsburg,,Small Forward,Role-Player,15,8
-302,Michelle,Tides,,Center,Role-Player,15,6
-303,Julia,Nebbiolo,,Shooting Guard,Starter,32,13
-304,Julia,Pinot Noir,,Point Guard,Starter,35,11
-305,Grace,Gamay,,Power Forward,Role-Player,16,8
-306,Elizabeth,Whelkington,,Point Guard,All-Star,45,12
-307,Brielle,Pools,,Small Forward,Role-Player,20,2
-308,Isaac,Isles,,Point Guard,Rookie,21,4
-309,John,Cascade,,Shooting Guard,Role-Player,18,9
-310,Nathan,Shrimptown,,Shooting Guard,Starter,27,8
-311,Mamie,Slope,,Small Forward,Role-Player,23,2
-312,George,Shrimpsworth,,Shooting Guard,Role-Player,22,4
-313,Logan,Springs,,Shooting Guard,Starter,25,10
-314,Owen,Pinot Noir,,Point Guard,Role-Player,14,5
-315,Julia,Loch,,Point Guard,Role-Player,15,2
-316,Nathan,Marsanne,,Shooting Guard,Role-Player,18,9
-317,James,Sauvignon Blanc,,Small Forward,Role-Player,12,7
-318,Ryder,Shellsworth,,Shooting Guard,Role-Player,15,5
-319,Noah,Shellsworth,,Point Guard,Role-Player,20,1
-320,Abigail,Clamworthy,,Center,Starter,29,9
-321,Aiden,Bayou,,Shooting Guard,All-Star,44,13
-322,Barbara,Crest,,Power Forward,All-Star,36,22
-323,Franklin,Lobsterburg,,Point Guard,Role-Player,15,5
-324,Chester,Springs,,Shooting Guard,Role-Player,14,1
-325,Mateo,Gewürztraminer,,Power Forward,All-Star,38,17
-326,Ellie,Lobsterburg,,Shooting Guard,Starter,25,8
-327,Dolley,Isles,,Small Forward,Starter,24,12
-328,Samuel,Barnacleburg,,Shooting Guard,Role-Player,15,4
-329,Mamie,Starfishborough,,Small Forward,Role-Player,17,4
-330,George,Shoals,,Center,Role-Player,12,5
-331,Edith,Rapids,,Small Forward,Rookie,18,6
-332,Abigail,Reef,,Center,Starter,30,12
-333,Madeline,Zinfandel,,Shooting Guard,All-Star,36,23
-334,John,Whalesburg,,Point Guard,Role-Player,20,1
-335,Leah,Beach,,Shooting Guard,Starter,30,12
-336,Nova,Ridge,,Center,Rookie,35,4
-337,Autumn,Pinot Noir,,Small Forward,Starter,25,9
-338,Lou,Crawdadsworth,,Small Forward,Role-Player,14,4
-339,Ellen,Wells,,Point Guard,Role-Player,17,9
-340,Barbara,Roussanne,,Center,Role-Player,20,3
-341,Scarlett,Barnacleton,,Power Forward,Superstar,59,32
-342,Mary,Molinara,,Center,Role-Player,23,7
-343,Hudson,Harbor,,Power Forward,All-Star,41,10
-344,Hillary,Mound,,Center,All-Star,46,15
-345,Chloe,Clamworthy,,Shooting Guard,Role-Player,17,5
-346,Nova,Primitivo,,Shooting Guard,Starter,27,11
-347,Grace,Krabby,,Center,All-Star,45,25
-348,Scarlet,Barnacleman,,Shooting Guard,Starter,35,11
-349,John,Cannonau,,Small Forward,Role-Player,12,2
-350,Andrew,Fiano,,Shooting Guard,Starter,27,12
-351,Victoria,Tides,,Point Guard,Rookie,14,2
-352,James,Lobsterville,,Small Forward,Starter,27,9
-353,Lyndon,Riesling,,Center,Role-Player,19,6
-354,Avery,Lobsterman,,Center,Starter,34,9
-355,Gabriel,Musselsburg,,Shooting Guard,Role-Player,14,3
-356,Edith,Crawdadborough,,Point Guard,Starter,24,11
-357,Jimmy,Champagne,,Shooting Guard,Rookie,22,6
-358,Eliza,Snailton,,Small Forward,Role-Player,12,8
-359,Edith,Barnacleman,,Shooting Guard,Starter,26,11
-360,Ulysses,Pools,,Shooting Guard,Role-Player,14,8
-361,Penelope,Krabbington,,Center,Role-Player,16,5
-362,Eliza,Terrace,"""The Closer"" ",Center,Superstar,49,25
-363,Liam,Bassington,,Point Guard,Starter,35,13
-364,Franklin,Krabbington,,Point Guard,All-Star,39,12
-365,Angelica,Pools,,Center,Role-Player,13,6
-366,Nellie,Strait,,Point Guard,Starter,28,9
-367,Eliza,Whelkington,,Center,All-Star,36,17
-368,Mateo,Oysterburg,,Point Guard,Starter,35,12
-369,Helen,Lobsterville,,Point Guard,Role-Player,18,8
-370,Edith,Springs,,Small Forward,Starter,32,10
-371,Scarlett,Starfishman,,Shooting Guard,Role-Player,23,5
-372,Lyndon,Squidwardson,,Power Forward,All-Star,39,18
-373,Ellen,Knoll,,Small Forward,Rookie,37,2
-374,George,Shrimptown,,Shooting Guard,All-Star,39,15
-375,Jimmy,Ridge,,Center,Rookie,21,6
-376,Helen,Brook,,Shooting Guard,Rookie,28,5
-377,Martha,Clamsville,,Center,Role-Player,12,2
-378,Nancy,Shelltown,,Center,Starter,26,8
-379,Aiden,Knoll,,Shooting Guard,Starter,24,9
-380,Rutherford,Shellington,,Small Forward,Role-Player,17,9
-381,Martin,Whalesburg,,Center,Rookie,22,2
-382,Laura,Whaleton,,Center,Role-Player,19,6
-383,Mason,Falls,,Shooting Guard,Starter,29,9
-384,Riley,Bight,,Point Guard,Starter,24,9
-385,Liam,Scallopton,,Power Forward,Role-Player,13,2
-386,Grace,Whalesburg,,Center,Role-Player,15,8
-387,Mila,Cabernet Sauvignon,,Point Guard,Rookie,33,3
-388,Hazel,Moscato,,Shooting Guard,Starter,27,12
-389,Emily,Snailsworth,,Small Forward,Role-Player,20,9
-390,Letitia,Moscato,,Point Guard,Role-Player,19,2
-391,Andrew,Mere,,Small Forward,All-Star,39,19
-392,Ethan,Vale,,Shooting Guard,Starter,27,9
-393,Scarlet,Petit Verdot,,Small Forward,All-Star,46,17
-394,Lou,Oysterville,,Small Forward,Starter,32,8
-395,Florence,Pools,,Small Forward,Starter,24,8
-396,George,Summit,,Small Forward,Role-Player,14,3
-397,Isabella,Gulf,,Point Guard,Starter,29,13
-398,Carter,Banks,,Small Forward,Role-Player,17,5
-399,Eliza,Aligoté,"""Farm Dog"" ",Shooting Guard,Role-Player,21,4
-400,Mia,Banks,,Small Forward,Role-Player,22,9
+1,Alexander,Merlot,,Shooting Guard,All-Star,46,29
+2,Ulysses,Montepulciano,,Point Guard,Role-Player,22,4
+3,Rosalynn,Mumba,"""Assistance Dog"" ",Power Forward,Role-Player,18,6
+4,Grover,Dunes,,Shooting Guard,Rookie,13,6
+5,Nancy,Ridge,,Point Guard,Role-Player,21,3
+6,Noah,Whalesworth,,Point Guard,Starter,33,12
+7,Bill,Krillington,,Point Guard,Role-Player,16,1
+8,Madison,Moscato,,Center,Role-Player,23,1
+9,Benjamin,Haze,"""Inferno"" ",Center,Role-Player,18,8
+10,Caroline,Reef,,Small Forward,Role-Player,23,3
+11,Elizabeth,Syrah,,Small Forward,Role-Player,15,9
+12,Sarah,Chill,,Small Forward,Starter,29,11
+13,Benjamin,Joshi,,Power Forward,Starter,30,11
+14,Dolley,Snailworthy,,Center,Rookie,33,7
+15,Henry,Shoal,,Point Guard,Starter,28,9
+16,Julia,Shrimpsburg,,Shooting Guard,Starter,28,11
+17,Isabella,Musselsworth,,Point Guard,Role-Player,13,7
+18,Woodrow,Tornado,,Center,Role-Player,19,1
+19,Rosalynn,Gupta,,Small Forward,Starter,31,13
+20,Alexander,Whalesburg,,Power Forward,Starter,25,8
+21,Leah,Opal,,Point Guard,Superstar,60,33
+22,Nora,Knoll,,Power Forward,Starter,32,13
+23,Julia,Nakamura,,Power Forward,Role-Player,19,2
+24,Jimmy,Barnacleburg,,Small Forward,Role-Player,14,2
+25,Aiden,Onyeka,,Shooting Guard,Starter,27,13
+26,Henry,Verdejo,,Shooting Guard,Role-Player,19,3
+27,Chloe,Fiano,,Point Guard,All-Star,41,22
+28,Landon,Platinum,,Shooting Guard,Starter,27,13
+29,James,Barnacleton,,Power Forward,Superstar,53,27
+30,Liam,Verdejo,,Point Guard,All-Star,36,14
+31,Michelle,Oysterville,,Point Guard,Starter,27,8
+32,Ava,Nkosi,,Small Forward,Starter,35,11
+33,Hazel,Starfishborough,,Point Guard,Role-Player,15,7
+34,James,Clamsville,,Center,Starter,29,9
+35,James,Opal,,Power Forward,Role-Player,17,3
+36,Jane,Yamada,,Power Forward,Starter,33,13
+37,Natalie,Malbec,,Small Forward,Starter,24,10
+38,John,Zinfandel,,Shooting Guard,Rookie,31,3
+39,Kai,Shellington,,Point Guard,Superstar,52,30
+40,Nora,Yamamoto,,Shooting Guard,Starter,34,13
+41,Helen,Abimbola,,Shooting Guard,Rookie,17,7
+42,Nellie,Shellsworth,,Point Guard,Rookie,40,6
+43,Nancy,Rise,,Small Forward,Starter,28,12
+44,Peyton,Sasaki,,Small Forward,Starter,28,10
+45,Dolley,Dunes,,Shooting Guard,Role-Player,23,1
+46,Caroline,Mehta,,Small Forward,Role-Player,20,1
+47,Ellen,Bassington,,Power Forward,Role-Player,21,3
+48,Aiden,Squidsworth,,Power Forward,Starter,35,11
+49,Julia,Primitivo,,Small Forward,All-Star,40,27
+50,Jane,Crest,,Small Forward,Role-Player,22,6
+51,Zachary,Squidworth,,Small Forward,Role-Player,13,2
+52,Florence,Molinara,,Shooting Guard,Role-Player,21,4
+53,Lyndon,Lobsterburg,,Shooting Guard,Starter,33,13

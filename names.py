@@ -17,7 +17,33 @@ first_names = [
     'Frances', 'Caroline', 'Jane', 'Harriet', 'Julia', 'Lucy', 'Edith', 'Ellen', 'Helen', 'Lou',
     'Grace', 'Florence', 'Edith', 'Nellie', 'Ellen', 'Lou', 'Grace', 'Florence', 'Edith', 'Nellie',
     'Edith', 'Grace', 'Lou', 'Helen', 'Edith', 'Grace', 'Bess', 'Mamie', 'Florence', 'Lou',
-    'Elizabeth', 'Rosalynn', 'Nancy', 'Barbara', 'Hillary', 'Laura', 'Michelle', 'Jill'
+    'Elizabeth', 'Rosalynn', 'Nancy', 'Barbara', 'Hillary', 'Laura', 'Michelle', 'Jill', 'AJ', 'AC', 'JJ', 'EJ', 'LJ', 'CJ', 'DJ', 'GJ', 'Akira', 'Mateo', 'Zahra', 'Ananya', 'Santiago', 'Aisha', 'Luca', 'Aarav', 'Amara', 'Nadia',
+    'Yuki', 'Ravi', 'Eva', 'Omar', 'Hana', 'Makoto', 'Lila', 'Kai', 'Sofia', 'Rohan',
+    'Isabella', 'Caden', 'Aaradhya', 'Aiden', 'Olivia', 'Yuna', 'Matea', 'Javier', 'Aria', 'Yusuke',
+    'Liam', 'Nina', 'Yusuf', 'Maya', 'Cristiano', 'Aishwarya', 'Mila', 'Rafael', 'Ava', 'Yasmine',
+    'Leon', 'Zara', 'Haruto', 'Luna', 'Rahul', 'Zain', 'Elena', 'Aditya', 'Isaac', 'Aiko',
+    'Antonio', 'Sophie', 'Kenzo', 'Zainab', 'José', 'Ella', 'Mia', 'Arjun', 'Lina', 'Noah',
+    'Sara', 'Akari', 'Elijah', 'Aaliyah', 'Ryota', 'Amelia', 'David', 'Leila', 'Lincoln', 'Aisha',
+    'Victor', 'Sophia', 'Nina', 'Hiroshi', 'Liam', 'Riya', 'Kenta', 'Ayla', 'Kazuki', 'Jasmine',
+    'Cleo', 'Tariq', 'Aanya', 'Nolan', 'Anaya', 'Luca', 'Yara', 'Adrian', 'Elina', 'Sora',
+    'Emi', 'Amir', 'Zoe', 'Riko', 'Mason', 'Sophie', 'Haru', 'Amina', 'Ethan', 'Lily',
+    'Mateo', 'Aiden', 'Nyla', 'Max', 'Mira', 'Sora', 'Ayman', 'Emery', 'Liam', 'Amara',
+    'Zara', 'Rohan', 'Yara', 'Omar', 'Eva', 'Maya', 'Kian', 'Ariana', 'Kai', 'Isabella',
+    'Jun', 'Naomi', 'Zane', 'Ava', 'Yuki', 'Zahra', 'Hudson', 'Mia', 'Leila', 'Kazuki',
+    'Zainab', 'Arjun', 'Yusuf', 'Zain', 'Hana', 'Riya', 'Luca', 'Lina', 'Aria', 'Javier',
+    'Liam', 'Yuna', 'Matea', 'Santiago', 'Nadia', 'Hiroshi', 'Sophia', 'Makoto', 'Lily', 'Aarav',
+    'Maya', 'Zoe', 'Kenta', 'Yasmine', 'José', 'Nina', 'Ella', 'Akari', 'David', 'Elena',  'Liamuel', 'Arianae', 'Kazara', 'Aidanah', 'Sofiano', 'Emelia', 'Olivonte', 'Haruko', 'Makari', 'Rianah',
+    'Isarina', 'Cadenzo', 'Arielleo', 'Leiano', 'Milaiah', 'Sophuen', 'Yukariel', 'Zainaiah', 'Harioh', 'Lianaomi',
+    'Mikenzo', 'Liara', 'Hudsonna', 'Nolena', 'Santara', 'Yukuna', 'Kenzara', 'Avelena', 'Rohanah', 'Saraya', 'Liamuel', 'Arianae', 'Kazara', 'Aidanah', 'Sofiano', 'Emelia', 'Olivonte', 'Haruko', 'Makari', 'Rianah',
+    'Isarina', 'Cadenzo', 'Arielleo', 'Leiano', 'Milaiah', 'Sophuen', 'Yukariel', 'Zainaiah', 'Harioh', 'Lianaomi',
+    'Mikenzo', 'Liara', 'Hudsonna', 'Nolena', 'Santara', 'Yukuna', 'Kenzara', 'Avelena', 'Rohanah', 'Saraya',
+    'Zarion', 'Alysandro', 'Niamara', 'Jasmina', 'Eliandro', 'Isaraya', 'Zayelle', 'Kyrian', 'Aysara', 'Elianora',
+    'Rhiara', 'Olyvia', 'Jaylenzo', 'Sofari', 'Kianara', 'Lylitha', 'Naviyah', 'Mikariel', 'Jovanni', 'Elarian',
+    'Yasmina', 'Kyliara', 'Johariel', 'Amadara', 'Kaelina', 'Zionna', 'Avelynne', 'Rashari', 'Mariantho', 'Saraiel',
+    'Elyssia', 'Nolantho', 'Saralyn', 'Kyndara', 'Averil', 'Zyleria', 'Halyssa', 'Yovani', 'Mikaiah', 'Nyleah',
+    'Zairon', 'Averina', 'Jasmineo', 'Kysondra', 'Oliviana', 'Zyanya', 'Elioana', 'Saranoah', 'Kaeliana', 'Yohannes',
+    'Kaviel', 'Yariza', 'Zyviana', 'Navario', 'Aylaitha', 'Kalyssa', 'Elyasandro', 'Zarionna', 'Elariana', 'Joliana',
+    'Zanderia', 'Ilyssio', 'Ryleiana', 'Lynovio', 'Kyrielle', 'Ezriano', 'Olivianne', 'Averiana', 'Zykari', 'Raeliana'
 ]
 
 last_names = [
@@ -45,7 +71,19 @@ last_names = [
     'Petite Sirah', 'Grüner Veltliner', 'Moscato', 'Prosecco', 'Champagne', 'Cabernet Franc',
     'Muscat', 'Shiraz', 'Grenache', 'Verdejo', 'Albariño', 'Semillon', 'Roussanne', 'Marsanne',
     'Viura', 'Corvina', 'Rondinella', 'Molinara', 'Negroamaro', 'Primitivo', 'Aglianico', 'Fiano',
-    'Vermentino', 'Aligoté', 'Cinsault', 'Carignan', 'Glera', 'Tannat', 'Montepulciano', 'Cannonau'   
+    'Vermentino', 'Aligoté', 'Cinsault', 'Carignan', 'Glera', 'Tannat', 'Montepulciano', 'Cannonau','Champagne', 'Sapphire', 'Emerald', 'Opal', 'Mocha', 'Platinum', 'Pearl', 'Crimson', 'Lavender',
+    'Aqua', 'Rosegold', 'Ivory', 'Mauve', 'Obsidian', 'Goldenrod', 'Sunshine', 'Breeze', 'Storm', 'Calm', 'Fog', 'Blizzard', 'Heatwave', 'Drizzle', 'Tornado', 'Hail',
+    'Drought', 'Rainbow', 'Sleet', 'Mist', 'Thunder', 'Cyclone', 'Chill', 'Monsoon', 'Haze', 'Gale', 'Popović', 'Ivanović', 'Stojanović', 'Jovanović', 'Nikolić', 'Đorđević', 'Kovačević', 'Petrović', 'Marković', 'Vuković',
+    'Milosavljević', 'Ristić', 'Todorović', 'Pavlović', 'Stanković', 'Janković', 'Aleksić', 'Simić', 'Dragić', 'Gajić',
+    'Raković', 'Tošić', 'Nenadović', 'Milinković', 'Milićević', 'Nkosi', 'Kabongo', 'Ouedraogo', 'Sango', 'Lumumba', 'Mukendi', 'Mwamba', 'Bemba', 'Bokassa', 'Diallo',
+    'Ntumba', 'Abimbola', 'Makamba', 'Mumba', 'Kagame', 'Mulumba', 'Nzuzi', 'Banza', 'Tshibanda', 'Ogbonna',
+    'Onyeka', 'Mbembe', 'Ngozi', 'Kaninda', 'Ikechukwu', 'Sato', 'Suzuki', 'Takahashi', 'Tanaka', 'Watanabe', 'Ito', 'Yamamoto', 'Nakamura', 'Kobayashi', 'Kato',
+    'Yoshida', 'Yamada', 'Sasaki', 'Yamaguchi', 'Matsumoto', 'Patel', 'Shah', 'Singh', 'Kumar', 'Joshi', 'Mehta', 'Gupta', 'Sharma', 'Verma', 'Reddy',
+    'Chopra', 'Pandey', 'Malhotra', 'Sinha', 'Rao', 'Iyer', 'Mittal', 'Chauhan', 'Yadav', 'Bhat',  'Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller', 'Wilson', 'Moore', 'Taylor',
+    'Anderson', 'Thomas', 'Jackson', 'White', 'Harris', 'Martin', 'Thompson', 'Garcia', 'Martinez', 'Jones',
+    'Davis', 'Miller', 'Wilson', 'Moore', 'Taylor', 'Anderson', 'Thomas', 'Jackson', 'White', 'Harris',
+    'Martin', 'Thompson', 'Garcia', 'Martinez', 'Robinson', 'Clark', 'Lewis', 'Lee', 'Walker', 'Hall',
+    'Allen', 'Young', 'Hill', 'Wright', 'Scott', 'Adams', 'Evans', 'Ford', 'Dixon', 'Zzyzx'
 ]
 
 nick_names = [
