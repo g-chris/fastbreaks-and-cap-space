@@ -1,54 +1,13 @@
 Player_ID,First_Name,Last_Name,Nick_Name,Position,Player_Level,Overall_Score,Player_Salary
-1,Alexander,Merlot,,Shooting Guard,All-Star,46,29
-2,Ulysses,Montepulciano,,Point Guard,Role-Player,22,4
-3,Rosalynn,Mumba,"""Assistance Dog"" ",Power Forward,Role-Player,18,6
-4,Grover,Dunes,,Shooting Guard,Rookie,13,6
-5,Nancy,Ridge,,Point Guard,Role-Player,21,3
-6,Noah,Whalesworth,,Point Guard,Starter,33,12
-7,Bill,Krillington,,Point Guard,Role-Player,16,1
-8,Madison,Moscato,,Center,Role-Player,23,1
-9,Benjamin,Haze,"""Inferno"" ",Center,Role-Player,18,8
-10,Caroline,Reef,,Small Forward,Role-Player,23,3
-11,Elizabeth,Syrah,,Small Forward,Role-Player,15,9
-12,Sarah,Chill,,Small Forward,Starter,29,11
-13,Benjamin,Joshi,,Power Forward,Starter,30,11
-14,Dolley,Snailworthy,,Center,Rookie,33,7
-15,Henry,Shoal,,Point Guard,Starter,28,9
-16,Julia,Shrimpsburg,,Shooting Guard,Starter,28,11
-17,Isabella,Musselsworth,,Point Guard,Role-Player,13,7
-18,Woodrow,Tornado,,Center,Role-Player,19,1
-19,Rosalynn,Gupta,,Small Forward,Starter,31,13
-20,Alexander,Whalesburg,,Power Forward,Starter,25,8
-21,Leah,Opal,,Point Guard,Superstar,60,33
-22,Nora,Knoll,,Power Forward,Starter,32,13
-23,Julia,Nakamura,,Power Forward,Role-Player,19,2
-24,Jimmy,Barnacleburg,,Small Forward,Role-Player,14,2
-25,Aiden,Onyeka,,Shooting Guard,Starter,27,13
-26,Henry,Verdejo,,Shooting Guard,Role-Player,19,3
-27,Chloe,Fiano,,Point Guard,All-Star,41,22
-28,Landon,Platinum,,Shooting Guard,Starter,27,13
-29,James,Barnacleton,,Power Forward,Superstar,53,27
-30,Liam,Verdejo,,Point Guard,All-Star,36,14
-31,Michelle,Oysterville,,Point Guard,Starter,27,8
-32,Ava,Nkosi,,Small Forward,Starter,35,11
-33,Hazel,Starfishborough,,Point Guard,Role-Player,15,7
-34,James,Clamsville,,Center,Starter,29,9
-35,James,Opal,,Power Forward,Role-Player,17,3
-36,Jane,Yamada,,Power Forward,Starter,33,13
-37,Natalie,Malbec,,Small Forward,Starter,24,10
-38,John,Zinfandel,,Shooting Guard,Rookie,31,3
-39,Kai,Shellington,,Point Guard,Superstar,52,30
-40,Nora,Yamamoto,,Shooting Guard,Starter,34,13
-41,Helen,Abimbola,,Shooting Guard,Rookie,17,7
-42,Nellie,Shellsworth,,Point Guard,Rookie,40,6
-43,Nancy,Rise,,Small Forward,Starter,28,12
-44,Peyton,Sasaki,,Small Forward,Starter,28,10
-45,Dolley,Dunes,,Shooting Guard,Role-Player,23,1
-46,Caroline,Mehta,,Small Forward,Role-Player,20,1
-47,Ellen,Bassington,,Power Forward,Role-Player,21,3
-48,Aiden,Squidsworth,,Power Forward,Starter,35,11
-49,Julia,Primitivo,,Small Forward,All-Star,40,27
-50,Jane,Crest,,Small Forward,Role-Player,22,6
-51,Zachary,Squidworth,,Small Forward,Role-Player,13,2
-52,Florence,Molinara,,Shooting Guard,Role-Player,21,4
-53,Lyndon,Lobsterburg,,Shooting Guard,Starter,33,13
+1,Zoey,Fiano,,Shooting Guard,Superstar,51,29
+2,Anaya,Clamworthy,,Small Forward,Role-Player,16,2
+3,Abraham,Ngozi,,Point Guard,Starter,35,10
+4,Milaiah,Ikechukwu,,Small Forward,Rookie,31,4
+5,Averina,Mere,,Power Forward,Superstar,54,38
+6,Martha,Sangiovese,,Small Forward,Starter,27,11
+7,Abraham,Banks,,Center,Role-Player,17,7
+8,Rosalynn,Musselsburg,,Small Forward,Starter,29,10
+9,Luca,Clamsworth,,Center,Role-Player,20,5
+10,Lou,Squidsworth,,Power Forward,Role-Player,15,8
+11,Saralyn,Clamsville,,Center,Role-Player,18,4
+12,Yara,Oysterson,,Power Forward,Starter,24,11
