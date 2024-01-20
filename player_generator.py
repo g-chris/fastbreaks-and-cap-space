@@ -113,6 +113,7 @@ def display_roster(roster):
         print("Attributes:", player.attributes)
         print()
 
+def display_totals(roster):
     total_salary = sum(player.player_salary for player in roster)
     print(f"Total Salary: {total_salary}")
 
@@ -145,12 +146,19 @@ def display_roster(roster):
     average_overall_level = sum(player.overall_score for player in roster) / len(roster)
     print(f"Average Overall Level: {average_overall_level}")
 
+    total_salary = sum(player.player_salary for player in roster)
+    print(f"Total Salary: {total_salary}")
+
+    # Calculate average salary
+    average_salary = sum(player.player_salary for player in roster) / len(roster)
+    print(f"Average Salary: {average_salary}")
+
 def export_to_csv(roster):
     csv_columns = ['Player_ID', 'First_Name', 'Last_Name', 'Nick_Name', 'Position', 'Player_Level', 'Overall_Score', 'Player_Salary']
-    csv_file = "roster.csv"
+    csv_file = "test_roster.csv"
     
     try:
-        with open(csv_file, 'w', newline='') as csvfile:
+        with open(csv_file, 'w', encoding='utf-8', newline='') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
             writer.writeheader()
             for player in roster:
@@ -168,6 +176,7 @@ def export_to_csv(roster):
     except Exception as e:
         print("Error writing to CSV:", e)
 
-roster = generate_roster(400, 'regular')
-display_roster(roster)
-export_to_csv(roster)
+#for testing:
+#roster = generate_roster(100, 'rookies')
+#display_totals(roster)
+#export_to_csv(roster)
