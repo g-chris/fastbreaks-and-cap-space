@@ -88,8 +88,7 @@ last_names = [
 
 nick_names = [
     'Dune','1984', 'Brave New World','Sapiens','Outliers','Inferno','Misery','Jurassic Park',
-    'Fahrenheit 451',
-    'Frankenstein',
+    'Fahrenheit 451', 'Frankenstein',
     'Odyssey',
     'Ulysses',
     'Dracula',
@@ -126,3 +125,35 @@ nick_names = [
     'War Dog'
 ]
 
+locations = [
+    'Atlanta',
+    'Boston',
+    'Brooklyn',
+    'Charlotte',
+    'Chicago',
+    'Cleveland',
+    'Dallas',
+    'Denver',
+    'Detroit',
+    'San Francisco',
+    'Houston',
+    'Indianapolis',
+    'Los Angeles',
+    'Seattle',
+    'Memphis',
+    'Miami',
+    'Milwaukee',
+    'Minnesota',
+    'New Orleans',
+    'New York',
+    'Oklahoma City',
+    'Orlando',
+    'Philadelphia',
+    'Phoenix',
+    'Portland',
+    'Sacramento',
+    'San Antonio',
+    'Toronto',
+    'Utah',
+    'Washington'
+]
