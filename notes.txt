@@ -38,3 +38,23 @@ Shooting Guard	SHOT, DEX	INT, DEF
 Small Forward	SHOT, CON	INT, DEX
 Power Forward	STR, DEF	DEX, CON
 Center	        STR, DEF	DEX, SHOT
+
+Attributes and Counting Stats Interaction
+STR
++Blocks
++Scoring
+DEX
++Steal
++Scoring
+-Turnovers
+CON
++
+INT
++Assists
++
+SHOT
+DEF
+
+
+
+--Game Play-- 
