@@ -177,6 +177,6 @@ def export_to_csv(roster):
         print("Error writing to CSV:", e)
 
 #for testing:
-roster = generate_roster(100, 'rookies')
-display_totals(roster)
+#roster = generate_roster(100, 'rookies')
+#display_totals(roster)
 #export_to_csv(roster)

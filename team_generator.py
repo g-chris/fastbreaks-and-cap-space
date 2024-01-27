@@ -63,5 +63,5 @@ def print_teams(teams):
         print(f" #{team.team_id} - {team.location_name} {team.team_name}")
 
 #For testing
-teams = generate_teams(30)
-print_teams(teams)
+#teams = generate_teams(30)
+#print_teams(teams)
