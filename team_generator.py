@@ -1,5 +1,5 @@
 import random
-from names import locations
+from names import locations, team_names
 
 class Team:
     def __init__(self, team_id, location_name, team_name):
@@ -21,13 +21,31 @@ def select_unique_entry(my_list, selected_entries):
     
     return selected_entry
 
-# Example usage:
-selected_entries = []
+def pick_location():
+    selected_locations = []
 
-# Select entries until all are selected
-while True:
-    entry = select_unique_entry(locations, selected_entries)
-    if entry is None:
-        break
-    print(f"Selected entry: {entry}")
+    # Select entries until all are selected
+    while True:
+        entry = select_unique_entry(locations, selected_locations)
+        if entry is None:
+            break
+        print(f"Selected entry: {entry}")
+
+def pick_team_name():
+    selected_team_names = []
+
+    # Select entries until all are selected
+    while True:
+        entry = select_unique_entry(team_names, selected_team_names)
+        if entry is None:
+            break
+        print(f"Selected entry: {entry}")
+
+
+def generate_teams(num_teams):
+    teams = []
+
+    for team_num in range(1, team_num + 1):
+        team_id = team_num
+        
 

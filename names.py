@@ -1,5 +1,5 @@
 first_names = [
-    'James', 'Emma', 'Liam', 'Olivia', 'Noah', 'Ava', 'Isabella', 'Sophia', 'Lucas', 'Mia',
+    'James', 'Ankit', 'Emma', 'Liam', 'Olivia', 'Noah', 'Ava', 'Isabella', 'Sophia', 'Lucas', 'Mia',
     'Jackson', 'Leah', 'Aiden', 'Elijah', 'Harper', 'Caden', 'Amelia', 'Abigail', 'Benjamin', 'Ethan',
     'Mason', 'Ella', 'Alexander', 'Scarlett', 'Aria', 'Grayson', 'Luna', 'Carter', 'Chloe', 'Sofia',
     'Henry', 'Avery', 'Samuel', 'Ellie', 'Max', 'Grace', 'Jack', 'Madison', 'Lily', 'Zoe',
@@ -156,4 +156,12 @@ locations = [
     'Toronto',
     'Utah',
     'Washington'
+]
+
+
+team_names = [
+'Beat', 'Vibe', 'Discovery', 'Yetis', 'Legacy', 'Rattlesnakes', 'Blizzard', 'Leopards','Wave', 'Pioneers',
+ 'Sorcery', 'Druids', 'Fighters', 'Clerics', 'Mana', 'Goblins', 'Trolls', 'Mountain Orcs', 'Dragonborns', 'Guildmasters',
+ 'Witchcraft', 'Crimson Plague', 'Archmages', 'Paladins', 'Duskspell', 'Morning Stars', 'Great Axes', 'Dungeon',
+ 'Pickles', 'First Light', 'Crunk', 'Bass', 'Squirrels', 'Scholars', 'Necromancers', 'Ornothologists', 'Pediatric Dieticians'
 ]
