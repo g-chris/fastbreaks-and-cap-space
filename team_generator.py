@@ -3,17 +3,18 @@ from names import locations, team_names
 
 class Team:
     def __init__(self, team_id, location_name, team_name):
-        self.player_id = team_id
+        self.team_id = team_id
         self.location_name = location_name
         self.team_name = team_name
 
-
+selected_locations = []
+selected_team_names = []
 
 def select_unique_entry(my_list, selected_entries):
-    remaining_entries = list(set(my_list) - set(selected_entries))
-    
+    remaining_entries = [entry for entry in my_list if entry not in selected_entries]
+
     if not remaining_entries:
-        print("All entries have been selected.")
+        #print("All entries have been selected.")
         return None
     
     selected_entry = random.choice(remaining_entries)
@@ -22,30 +23,45 @@ def select_unique_entry(my_list, selected_entries):
     return selected_entry
 
 def pick_location():
-    selected_locations = []
 
     # Select entries until all are selected
     while True:
         entry = select_unique_entry(locations, selected_locations)
         if entry is None:
             break
-        print(f"Selected entry: {entry}")
+        #print(f"Selected entry: {entry}")
+
+        return entry
+
+
 
 def pick_team_name():
-    selected_team_names = []
 
     # Select entries until all are selected
     while True:
         entry = select_unique_entry(team_names, selected_team_names)
         if entry is None:
             break
-        print(f"Selected entry: {entry}")
+        #print(f"Selected entry: {entry}")
+
+        return entry
 
 
 def generate_teams(num_teams):
     teams = []
 
-    for team_num in range(1, team_num + 1):
+    for team_num in range(1, num_teams + 1):
         team_id = team_num
+        location_name = pick_location()
+        team_name = pick_team_name()
+        team = Team(team_id, location_name, team_name)
+        teams.append(team)
+    return teams
         
+def print_teams(teams):
+    for team in teams:
+        print(f" #{team.team_id} - {team.location_name} {team.team_name}")
 
+#For testing
+teams = generate_teams(30)
+print_teams(teams)
