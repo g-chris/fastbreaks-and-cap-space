@@ -1,4 +1,5 @@
 import sqlite3
+#Only imported for testing
 import player_generator
 import team_generator
 
@@ -140,7 +141,7 @@ def drop_table(db_name, table_name):
 #For testing
 #roster = player_generator.generate_roster(80, 'rookies') 
 #create_player_table("league01.db", roster)
-print_player_table("league01.db")
+#print_player_table("league01.db")
 #create_team_table()    
 #print_team_table() 
 
