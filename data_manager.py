@@ -3,6 +3,9 @@ import sqlite3
 import player_generator
 import team_generator
 
+
+#Create tables functions-------------------
+#dim_players
 def create_player_table(db_name, roster):
     # Connect to the SQLite database (or create it if it doesn't exist)
     conn = sqlite3.connect(db_name)
@@ -59,6 +62,7 @@ def create_player_table(db_name, roster):
     conn.commit()
     conn.close()
 
+#dim_teams
 def create_team_table(db_name, teams):
     # Connect to the SQLite database (or create it if it doesn't exist)
     conn = sqlite3.connect(db_name)
@@ -66,9 +70,9 @@ def create_team_table(db_name, teams):
     # Create a cursor object to interact with the database
     cursor = conn.cursor()
 
-    # Create a table (example table: dim_team)
+    # Create a table (example table: dim_teams)
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS dim_team (
+        CREATE TABLE IF NOT EXISTS dim_teams (
             team_id INTEGER PRIMARY KEY,
             location_name TEXT,
             team_name TEXT
@@ -96,6 +100,89 @@ def create_team_table(db_name, teams):
     conn.commit()
     conn.close()
 
+#fact_drafted_players
+def create_draft_table(db_name, draft):
+    # Connect to the SQLite database (or create it if it doesn't exist)
+    conn = sqlite3.connect(db_name)
+
+    # Create a cursor object to interact with the database
+    cursor = conn.cursor()
+
+    # Create a table (example table: fact_drafted_players)
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS fact_drafted_players (
+            draft_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            player_id INTEGER,
+            team_id INTEGER,
+            draft_order INTEGER,
+            FOREIGN KEY (player_id) REFERENCES dim_players(player_id),
+            FOREIGN KEY (team_id) REFERENCES dim_teams(team_id)
+        )
+    ''')
+
+    # Commit the changes
+    conn.commit()
+
+    # Assume you have the 'teams' list with team objects
+
+    #teams = team_generator.generate_teams(30)
+
+    # Insert data from the 'roster' list
+    for drafted_players in draft:
+        cursor.execute('''
+            INSERT INTO fact_drafter_players (
+                draft_id, player_id, team_id, draft_order
+            ) VALUES (NULL, ?, ?, ?)
+        ''', (
+            draft.player_id, draft.team_id, draft.draft_order, 
+        ))
+
+    # Commit the changes and close the connection
+    conn.commit()
+    conn.close()
+
+#fact_team_rosters
+def create_team_table(db_name, team_roster):
+    # Connect to the SQLite database (or create it if it doesn't exist)
+    conn = sqlite3.connect(db_name)
+
+    # Create a cursor object to interact with the database
+    cursor = conn.cursor()
+
+    # Create a table (example table: dim_team)
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS fact_team_rosters (
+            roster_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            player_id INTEGER,
+            team_id INTEGER,
+            FOREIGN KEY (player_id) REFERENCES dim_players(player_id),
+            FOREIGN KEY (team_id) REFERENCES dim_teams(team_id)
+        )
+    ''')
+
+    # Commit the changes
+    conn.commit()
+
+    # Assume you have the 'teams' list with team objects
+
+    #teams = team_generator.generate_teams(30)
+
+    # Insert data from the 'roster' list
+    for players in team_roster:
+        cursor.execute('''
+            INSERT INTO fact_team_rosters (
+                roster_id, player_id, team_id
+            ) VALUES (NULL, ?, ?)
+        ''', (
+            team_roster.player_id, team_roster.team_id 
+        ))
+
+    # Commit the changes and close the connection
+    conn.commit()
+    conn.close()
+
+#Print tables functions---------------------
+
 def print_player_table(db_name):
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
@@ -116,7 +203,7 @@ def print_team_table(db_name):
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
 
-    cursor.execute('SELECT * FROM dim_team')
+    cursor.execute('SELECT * FROM dim_teams')
     
     # Fetch all the rows
     rows = cursor.fetchall()
@@ -128,6 +215,7 @@ def print_team_table(db_name):
     # Close the connection
     conn.close()
 
+#Drop tables/ data mangement functions----------
 def drop_table(db_name, table_name):
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
@@ -137,7 +225,7 @@ def drop_table(db_name, table_name):
     # Commit the changes
     conn.commit()
 
-
+    
 #For testing
 #roster = player_generator.generate_roster(80, 'rookies') 
 #create_player_table("league01.db", roster)
