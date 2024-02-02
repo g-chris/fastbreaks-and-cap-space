@@ -73,7 +73,7 @@ def create_team_table(db_name, teams):
     # Create a table (example table: dim_teams)
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS dim_teams (
-            team_id INTEGER PRIMARY KEY,
+            team_id INTEGER PRIMARY KEY AUTOINCREMENT,
             location_name TEXT,
             team_name TEXT
         )
@@ -91,9 +91,9 @@ def create_team_table(db_name, teams):
         cursor.execute('''
             INSERT INTO dim_team (
                 team_id, location_name, team_name
-            ) VALUES (?, ?, ?)
+            ) VALUES (NULL, ?, ?)
         ''', (
-            team.team_id, team.location_name, team.team_name, 
+            team.location_name, team.team_name, 
         ))
 
     # Commit the changes and close the connection
@@ -142,7 +142,7 @@ def create_draft_table(db_name, draft):
     conn.close()
 
 #fact_team_rosters
-def create_team_table(db_name, team_roster):
+def create_team_roster_table(db_name, team_roster):
     # Connect to the SQLite database (or create it if it doesn't exist)
     conn = sqlite3.connect(db_name)
 
@@ -225,12 +225,14 @@ def drop_table(db_name, table_name):
     # Commit the changes
     conn.commit()
 
-    
+
 #For testing
 #roster = player_generator.generate_roster(80, 'rookies') 
 #create_player_table("league01.db", roster)
 #print_player_table("league01.db")
-#create_team_table()    
-#print_team_table() 
+drop_table("league01.db", "dim_teams")
+teams = team_generator.generate_teams(30)
+create_team_table("league01.db", teams)    
+print_team_table("league01.db") 
 
-#drop_table("league01.db", "dim_players")
+#drop_table("league01.db", "dim_teams")

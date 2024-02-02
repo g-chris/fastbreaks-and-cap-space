@@ -29,8 +29,16 @@ def create_players_and_teams(league_db_name, player_count, team_count):
     #Create team dimension table and load teams into it
     data_manager.create_team_table(league_db_name, teams)
 
+#Assign players to all teams 
+def initial_draft(league_db_name):
+    print("draft called")
 
 
+create_players_and_teams("league01.db", 600, 30)
+
+data_manager.print_team_table("league01.db")
+
+data_manager.print_player_table("league01.db")
 
 
 
