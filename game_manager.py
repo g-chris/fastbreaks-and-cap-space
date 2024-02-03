@@ -5,6 +5,7 @@ import team_generator
 import draft_manager
 
 
+
 def create_players_and_teams(league_db_name, player_count, team_count):
     
     #Clear out any existing tables
@@ -31,16 +32,19 @@ def create_players_and_teams(league_db_name, player_count, team_count):
 
 #Assign players to all teams 
 def initial_draft(league_db_name):
-    print("draft called")
+    data_manager.create_draft_table(league_db_name)
+    draft_manager.snake_draft_players_for_all_teams(league_db_name)
+    #data_manager.print_draft_table(league_db_name)
 
 
+#print('create players and teams')
 create_players_and_teams("league01.db", 600, 30)
 
-data_manager.print_team_table("league01.db")
+initial_draft("league01.db")
 
-data_manager.print_player_table("league01.db")
+#data_manager.print_team_table("league01.db")
 
-
+#data_manager.print_player_table("league01.db")
 
 
 

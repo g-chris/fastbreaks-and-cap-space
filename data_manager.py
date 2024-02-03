@@ -89,7 +89,7 @@ def create_team_table(db_name, teams):
     # Insert data from the 'roster' list
     for team in teams:
         cursor.execute('''
-            INSERT INTO dim_team (
+            INSERT INTO dim_teams (
                 team_id, location_name, team_name
             ) VALUES (NULL, ?, ?)
         ''', (
@@ -101,36 +101,42 @@ def create_team_table(db_name, teams):
     conn.close()
 
 #fact_drafted_players
-def create_draft_table(db_name, draft):
+def create_draft_table(db_name):
+    #print('create_draft_table called')
     # Connect to the SQLite database (or create it if it doesn't exist)
     conn = sqlite3.connect(db_name)
 
     # Create a cursor object to interact with the database
     cursor = conn.cursor()
 
-    # Create a table (example table: fact_drafted_players)
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS fact_drafted_players (
-            draft_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            player_id INTEGER,
-            team_id INTEGER,
-            draft_order INTEGER,
-            FOREIGN KEY (player_id) REFERENCES dim_players(player_id),
-            FOREIGN KEY (team_id) REFERENCES dim_teams(team_id)
-        )
-    ''')
+    # Check if the table already exists
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='fact_drafted_players'")
+    table_exists = cursor.fetchone()
 
-    # Commit the changes
-    conn.commit()
+    if not table_exists:
+        # Create a table (example table: fact_drafted_players)
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS fact_drafted_players (
+                draft_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                player_id INTEGER,
+                team_id INTEGER,
+                draft_order INTEGER,
+                FOREIGN KEY (player_id) REFERENCES dim_players(player_id),
+                FOREIGN KEY (team_id) REFERENCES dim_teams(team_id)
+            )
+        ''')
 
-    # Assume you have the 'teams' list with team objects
+        # Commit the changes
+        conn.commit()
 
-    #teams = team_generator.generate_teams(30)
+    # Close the connection
+    conn.close()
 
-    # Insert data from the 'roster' list
+    #draft_manager will handle loading
+    """ # Insert data from the 'roster' list
     for drafted_players in draft:
         cursor.execute('''
-            INSERT INTO fact_drafter_players (
+            INSERT INTO fact_drafted_players (
                 draft_id, player_id, team_id, draft_order
             ) VALUES (NULL, ?, ?, ?)
         ''', (
@@ -139,7 +145,7 @@ def create_draft_table(db_name, draft):
 
     # Commit the changes and close the connection
     conn.commit()
-    conn.close()
+    conn.close() """
 
 #fact_team_rosters
 def create_team_roster_table(db_name, team_roster):
@@ -163,9 +169,6 @@ def create_team_roster_table(db_name, team_roster):
     # Commit the changes
     conn.commit()
 
-    # Assume you have the 'teams' list with team objects
-
-    #teams = team_generator.generate_teams(30)
 
     # Insert data from the 'roster' list
     for players in team_roster:
@@ -215,6 +218,27 @@ def print_team_table(db_name):
     # Close the connection
     conn.close()
 
+def print_draft_table(db_name):
+    try:
+        conn = sqlite3.connect(db_name)
+        #print('Connected to the database')
+        cursor = conn.cursor()
+
+        cursor.execute('SELECT * FROM fact_drafted_players')
+        
+        # Fetch all the rows
+        rows = cursor.fetchall()
+
+        # Print the results
+        for row in rows:
+            print(row)
+
+        # Close the connection
+        conn.close()
+        #print('Closed the connection')
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
 #Drop tables/ data mangement functions----------
 def drop_table(db_name, table_name):
     conn = sqlite3.connect(db_name)
@@ -230,9 +254,10 @@ def drop_table(db_name, table_name):
 #roster = player_generator.generate_roster(80, 'rookies') 
 #create_player_table("league01.db", roster)
 #print_player_table("league01.db")
-drop_table("league01.db", "dim_teams")
-teams = team_generator.generate_teams(30)
-create_team_table("league01.db", teams)    
-print_team_table("league01.db") 
+#drop_table("league01.db", "dim_teams")
+#teams = team_generator.generate_teams(30)
+#create_team_table("league01.db", teams)    
+#print_team_table("league01.db") 
 
 #drop_table("league01.db", "dim_teams")
+    
