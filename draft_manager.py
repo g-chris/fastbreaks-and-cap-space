@@ -70,20 +70,21 @@ def snake_draft_players_for_all_teams(db_name):
         cursor.execute("SELECT team_id FROM dim_teams;")
         team_ids = [row[0] for row in cursor.fetchall()]
 
-        print('Selected all team ids')
+        #print('Selected all team ids')
 
         num_players_per_team = 15
-        num_rounds = num_players_per_team // len(team_ids)
+        #num_rounds = num_players_per_team // len(team_ids)
+        num_rounds = num_players_per_team
 
         print(f"team ids: {team_ids}")
 
-        int(f"num_rounds: {num_rounds}")
+        #int(f"num_rounds: {num_rounds}")
 
-        print('round math complete')
+        #print('round math complete')
 
         for round_num in range(1, num_rounds + 1):
             print(f"Round {round_num}")
-            print('round loop flag')
+            #print('round loop flag')
 
             # Determine the order in which teams will pick in the current round
             if round_num % 2 == 0:
@@ -95,20 +96,8 @@ def snake_draft_players_for_all_teams(db_name):
 
             # Loop through each team in the draft order
             for team_id in draft_order:
-                print('team order flag')
-                # Draft players until the team has 15 players
-                while True:
-                    cursor.execute("""
-                        SELECT COUNT(*) FROM fact_drafted_players
-                        WHERE team_id = ?;
-                    """, (team_id,))
-                    current_team_size = cursor.fetchone()[0]
-
-                    if current_team_size >= num_players_per_team:
-                        print(f"Team {team_id} has reached {num_players_per_team} players.")
-                        break
-
-                    select_player_for_team(db_name, team_id)
+                #Selecr one player per team
+                select_player_for_team(db_name, team_id)
 
     except sqlite3.Error as e:
         print(f"SQLite error: {e}")
