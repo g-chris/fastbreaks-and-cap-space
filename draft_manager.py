@@ -1,8 +1,9 @@
 import sqlite3
+import random
 
 
 
-def select_player_for_team(db_name, team_id):
+def select_random_player_for_team(db_name, team_id):
     # Connect to the database
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
@@ -31,7 +32,83 @@ def select_player_for_team(db_name, team_id):
         print(f"Team {team_id} drafted Player {player_id}")
         conn.commit()
 
-def draft_players_for_all_teams(db_name):
+def select_best_position_player_for_team(db_name, team_id, round_num, num_players_per_team):
+    # Connect to the database
+    conn = sqlite3.connect(db_name)
+    cursor = conn.cursor()
+
+    try:
+        round_num = int(round_num)
+        num_players_per_team = int(num_players_per_team)
+    except ValueError as e:
+        raise ValueError(f"Error: {e}")
+
+
+    # Calculate the remaining salary budget for the team
+    cursor.execute("""
+        SELECT SUM(dim_players.player_salary)
+        FROM fact_drafted_players
+        LEFT JOIN dim_players ON dim_players.player_id = fact_drafted_players.player_id
+        WHERE fact_drafted_players.team_id = ?;
+    """, (team_id,))
+    result = cursor.fetchone()
+    
+    total_salary_used = result[0] if result else 0
+    try:
+        total_salary_used = int(total_salary_used)
+    except ValueError:
+        raise ValueError("Error: total_salary_used is not a valid integer.")
+
+    remaining_salary_budget = 100 - (num_players_per_team - round_num) - total_salary_used
+
+    # Determine if the team needs to fulfill position requirements
+    print(f"Remaining Salary Budget: {remaining_salary_budget}")
+    if remaining_salary_budget >= 0 and remaining_salary_budget < 100:
+        # The team needs to fulfill position requirements
+        print("Fulfilling Position Requirements")
+        positions = ['Point Guard', 'Shooting Guard', 'Small Forward', 'Power Forward', 'Center']
+        selected_position = random.choice(positions)
+
+        query = """
+            SELECT player_id
+            FROM dim_players
+            WHERE player_id NOT IN (SELECT player_id FROM fact_drafted_players)
+                AND position = ?
+                AND player_salary <= ?
+            ORDER BY overall_score DESC
+            LIMIT 1;
+        """
+
+        cursor.execute(query, (selected_position, remaining_salary_budget))
+    else:
+        # The team doesn't have position requirements
+        print("No Position Requirements")
+        query = """
+            SELECT player_id
+            FROM dim_players
+            WHERE player_id NOT IN (SELECT player_id FROM fact_drafted_players)
+                AND player_salary <= ?
+            ORDER BY overall_score DESC
+            LIMIT 1;
+        """
+
+        cursor.execute(query, (remaining_salary_budget,))
+
+    result = cursor.fetchone()
+
+    
+    if result:
+        player_id = result[0]
+        # Insert the drafted player into the fact_drafted_players table
+        cursor.execute("""
+            INSERT INTO fact_drafted_players (team_id, player_id)
+            VALUES (?, ?);
+        """, (team_id, player_id))
+        print(f"Team {team_id} drafted Player {player_id}")
+        conn.commit()
+
+
+def full_team_draft_players_for_all_teams(db_name):
 
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
@@ -54,7 +131,7 @@ def draft_players_for_all_teams(db_name):
                 print(f"Team {team_id} has reached 15 players.")
                 break
             
-            select_player_for_team(db_name, team_id)
+            select_random_player_for_team(db_name, team_id)
     # Close the connection
     conn.close()
 
@@ -96,8 +173,10 @@ def snake_draft_players_for_all_teams(db_name):
 
             # Loop through each team in the draft order
             for team_id in draft_order:
-                #Selecr one player per team
-                select_player_for_team(db_name, team_id)
+                #Select one player per team
+                select_best_position_player_for_team(db_name, team_id, round_num, num_players_per_team)
+                #select_random_player_for_team(db_name, team_id)
+
 
     except sqlite3.Error as e:
         print(f"SQLite error: {e}")
