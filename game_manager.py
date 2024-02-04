@@ -31,16 +31,18 @@ def create_players_and_teams(league_db_name, player_count, team_count):
     data_manager.create_team_table(league_db_name, teams)
 
 #Assign players to all teams 
-def initial_draft(league_db_name):
+def initial_draft(league_db_name, salary_cap):
     data_manager.create_draft_table(league_db_name)
-    draft_manager.snake_draft_players_for_all_teams(league_db_name)
+    draft_manager.snake_draft_players_for_all_teams(league_db_name, salary_cap)
     #data_manager.print_draft_table(league_db_name)
 
 
 #print('create players and teams')
-create_players_and_teams("league01.db", 600, 30)
+create_players_and_teams("league01.db", 550, 30)
 
-initial_draft("league01.db")
+salary_cap = 150
+
+initial_draft("league01.db", salary_cap)
 
 #data_manager.print_team_table("league01.db")
 

@@ -71,18 +71,19 @@ def assign_player_level(random_number):
     
 def generate_salary(player_level):
     if player_level == 'Superstar':
-        return random.randint(20, 40)
+        return random.randint(23, 36)
     elif player_level == 'All-Star':
-        return random.randint(10, 30)
+        return random.randint(9, 19)
     elif player_level == 'Starter':
-        return random.randint(8, 13)
+        return random.randint(7, 15)
     elif player_level == 'Role-Player':
-        return random.randint(1, 9)
+        return random.randint(1, 6)
     else:  # 'Rookie'
-        return random.randint(2, 7)
+        return random.randint(2, 5)
 
 def generate_roster(num_players, type):
     roster = []
+    selected_nick_names = []
 
     for player_num in range(1, num_players + 1):
         player_id = player_num
@@ -98,9 +99,14 @@ def generate_roster(num_players, type):
         attributes = generate_player_attributes(player_level)
         overall_score = sum(attributes.values())
         player_salary = generate_salary(player_level)
-        nick_name_number = random.randint(1, 250)
-        if nick_name_number > 247:
-            nick_name = f'"{random.choice(nick_names)}" '
+        nick_name_number = random.randint(1, 255)
+        if nick_name_number > 250:
+            remaining_nick_names = [name for name in nick_names if name not in selected_nick_names]
+            if not remaining_nick_names:
+                nick_name = ""
+            else:
+                nick_name = f'"{random.choice(nick_names)}" '
+                selected_nick_names.append(nick_name)
         else: nick_name = ""
         player = Player(player_id, first_name, last_name, nick_name, position, player_level, overall_score, player_salary, attributes)
         roster.append(player)

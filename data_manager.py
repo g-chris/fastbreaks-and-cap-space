@@ -45,13 +45,13 @@ def create_player_table(db_name, roster):
     for player in roster:
         cursor.execute('''
             INSERT INTO dim_players (
-                player_id, first_name, last_name, position, player_level,
+                player_id, first_name, nick_name, last_name, position, player_level,
                 overall_score, player_salary,
                 attribute_strength, attribute_dexterity, attribute_constitution,
                 attribute_intelligence, attribute_shooting, attribute_defense
-            ) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
-            player.first_name, player.last_name, player.position, player.player_level,
+            player.first_name, player.nick_name, player.last_name, player.position, player.player_level,
             player.overall_score, player.player_salary,
             player.attributes['strength'], player.attributes['dexterity'],
             player.attributes['constitution'], player.attributes['intelligence'],
@@ -258,6 +258,7 @@ def drop_table(db_name, table_name):
 #teams = team_generator.generate_teams(30)
 #create_team_table("league01.db", teams)    
 #print_team_table("league01.db") 
+#create_draft_table("league01.db")
 
 #drop_table("league01.db", "dim_teams")
     

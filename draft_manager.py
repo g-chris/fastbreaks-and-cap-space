@@ -2,7 +2,7 @@ import sqlite3
 import random
 
 
-
+#Initial draft functions-------------------------------------
 def select_random_player_for_team(db_name, team_id):
     # Connect to the database
     conn = sqlite3.connect(db_name)
@@ -32,7 +32,7 @@ def select_random_player_for_team(db_name, team_id):
         print(f"Team {team_id} drafted Player {player_id}")
         conn.commit()
 
-def select_best_position_player_for_team(db_name, team_id, round_num, num_players_per_team):
+def select_best_position_player_for_team(db_name, team_id, round_num, num_players_per_team, salary_cap):
     # Connect to the database
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
@@ -52,14 +52,24 @@ def select_best_position_player_for_team(db_name, team_id, round_num, num_player
         WHERE fact_drafted_players.team_id = ?;
     """, (team_id,))
     result = cursor.fetchone()
+
+    total_salary_used = result[0]
+
+   
     
-    total_salary_used = result[0] if result else 0
+    if not isinstance(result[0], int):
+        total_salary_used = 0
+    else:
+        total_salary_used = result[0]
+
+    #total_salary_used = "0" if isinstance(result, type(None)) else result[0]
+    
     try:
         total_salary_used = int(total_salary_used)
     except ValueError:
         raise ValueError("Error: total_salary_used is not a valid integer.")
 
-    remaining_salary_budget = 100 - (num_players_per_team - round_num) - total_salary_used
+    remaining_salary_budget = salary_cap - (num_players_per_team - round_num) - total_salary_used
 
     # Determine if the team needs to fulfill position requirements
     print(f"Remaining Salary Budget: {remaining_salary_budget}")
@@ -136,7 +146,7 @@ def full_team_draft_players_for_all_teams(db_name):
     conn.close()
 
 
-def snake_draft_players_for_all_teams(db_name):
+def snake_draft_players_for_all_teams(db_name, salary_cap):
     print('Snake Draft is called')
     try:
         conn = sqlite3.connect(db_name)
@@ -174,7 +184,7 @@ def snake_draft_players_for_all_teams(db_name):
             # Loop through each team in the draft order
             for team_id in draft_order:
                 #Select one player per team
-                select_best_position_player_for_team(db_name, team_id, round_num, num_players_per_team)
+                select_best_position_player_for_team(db_name, team_id, round_num, num_players_per_team, salary_cap)
                 #select_random_player_for_team(db_name, team_id)
 
 
