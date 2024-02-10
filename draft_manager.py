@@ -73,11 +73,47 @@ def select_best_position_player_for_team(db_name, team_id, round_num, num_player
 
     # Determine if the team needs to fulfill position requirements
     print(f"Remaining Salary Budget: {remaining_salary_budget}")
-    if remaining_salary_budget >= 0 and remaining_salary_budget < 100:
-        # The team needs to fulfill position requirements
-        print("Fulfilling Position Requirements")
+    
+    # Calculate the positional needs for the team
+    cursor.execute("""
+        SELECT positions.position,
+                players_by_position.player_count
+                FROM
+                    (
+                        SELECT 'Point Guard' AS position
+                        UNION SELECT 'Shooting Guard'
+                        UNION SELECT 'Small Forward'
+                        UNION SELECT 'Power Forward'
+                        UNION SELECT 'Center'
+	                ) AS positions
+                LEFT JOIN (
+                        SELECT dim_players.position, 
+		                count(*) as player_count
+                        FROM fact_drafted_players
+                        INNER JOIN dim_players ON dim_players.player_id = fact_drafted_players.player_id
+                        WHERE team_id = ?
+	                    GROUP BY 1
+                          ) AS players_by_position ON positions.position = players_by_position.position
+                        ORDER BY player_count ASC
+                    """, (team_id,))
+
+    result = cursor.fetchone()
+
+    if result:
+        selected_position = result[0]
+        if not isinstance(result[1], int):
+            position_count = 0
+        else:
+            position_count = result[1]
+    else:
         positions = ['Point Guard', 'Shooting Guard', 'Small Forward', 'Power Forward', 'Center']
         selected_position = random.choice(positions)
+        position_count = 0
+    
+    if position_count < 2:
+        # The team needs to fulfill position requirements
+        print("Fulfilling Position Requirements")
+        
 
         query = """
             SELECT player_id
