@@ -40,6 +40,8 @@ def initial_draft(league_db_name, salary_cap):
 #print('create players and teams')
 create_players_and_teams("league01.db", 550, 30)
 
+#data_manager.create_draft_table("league01.db")
+
 salary_cap = 150
 
 initial_draft("league01.db", salary_cap)

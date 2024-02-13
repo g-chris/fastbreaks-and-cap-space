@@ -72,12 +72,14 @@ def select_best_position_player_for_team(db_name, team_id, round_num, num_player
     remaining_salary_budget = salary_cap - (num_players_per_team - round_num) - total_salary_used
 
     # Determine if the team needs to fulfill position requirements
-    print(f"Remaining Salary Budget: {remaining_salary_budget}")
+    #print(f"Remaining Salary Budget: {remaining_salary_budget}")
+
+   
     
     # Calculate the positional needs for the team
     cursor.execute("""
         SELECT positions.position,
-                players_by_position.player_count
+                COALESCE(players_by_position.player_count, 0) as player_count
                 FROM
                     (
                         SELECT 'Point Guard' AS position
@@ -97,20 +99,41 @@ def select_best_position_player_for_team(db_name, team_id, round_num, num_player
                         ORDER BY player_count ASC
                     """, (team_id,))
 
-    result = cursor.fetchone()
+    result = cursor.fetchall()
 
-    if result:
-        selected_position = result[0]
-        if not isinstance(result[1], int):
-            position_count = 0
-        else:
-            position_count = result[1]
-    else:
-        positions = ['Point Guard', 'Shooting Guard', 'Small Forward', 'Power Forward', 'Center']
-        selected_position = random.choice(positions)
-        position_count = 0
+    # print("Query output:")
+    # for row in result:
+    #     print(row)
+
+
+
+    # if result:
+    #     selected_position = result[0]
+    #     if not isinstance(result[1], int):
+    #         position_count = 0
+    #     else:
+    #         position_count = result[1]
+    # else:
+    #     positions = ['Point Guard', 'Shooting Guard', 'Small Forward', 'Power Forward', 'Center']
+    #     selected_position = random.choice(positions)
+    #     position_count = 0
+
+    lowest_positions = []
+
+    for position, player_count in result:
+        lowest_count = result[0][1]
+        if player_count <= lowest_count:
+            lowest_count = player_count
+            lowest_positions.append(position)
+
+        # elif player_count == lowest_count:
+        #     lowest_positions.append(position)
+
+    # Randomly select one of the positions with the lowest count
+    selected_position = random.choice(lowest_positions)
+
     
-    if position_count < 2:
+    if lowest_count < 2:
         # The team needs to fulfill position requirements
         print("Fulfilling Position Requirements")
         
