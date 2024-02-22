@@ -29,7 +29,7 @@ def select_random_player_for_team(db_name, team_id):
             INSERT INTO fact_drafted_players (team_id, player_id)
             VALUES (?, ?);
         """, (team_id, player_id))
-        print(f"Team {team_id} drafted Player {player_id}")
+        #print(f"Team {team_id} drafted Player {player_id}")
         conn.commit()
 
 def select_best_position_player_for_team(db_name, team_id, round_num, num_players_per_team, salary_cap):
@@ -135,7 +135,7 @@ def select_best_position_player_for_team(db_name, team_id, round_num, num_player
     
     if lowest_count < 2:
         # The team needs to fulfill position requirements
-        print("Fulfilling Position Requirements")
+        #print("Fulfilling Position Requirements")
         
 
         query = """
@@ -151,7 +151,7 @@ def select_best_position_player_for_team(db_name, team_id, round_num, num_player
         cursor.execute(query, (selected_position, remaining_salary_budget))
     else:
         # The team doesn't have position requirements
-        print("No Position Requirements")
+        #print("No Position Requirements")
         query = """
             SELECT player_id
             FROM dim_players
@@ -173,7 +173,7 @@ def select_best_position_player_for_team(db_name, team_id, round_num, num_player
             INSERT INTO fact_drafted_players (team_id, player_id)
             VALUES (?, ?);
         """, (team_id, player_id))
-        print(f"Team {team_id} drafted Player {player_id}")
+        #print(f"Team {team_id} drafted Player {player_id}")
         conn.commit()
 
 
@@ -197,7 +197,7 @@ def full_team_draft_players_for_all_teams(db_name):
             current_team_size = cursor.fetchone()[0]
             
             if current_team_size >= 15:
-                print(f"Team {team_id} has reached 15 players.")
+                #print(f"Team {team_id} has reached 15 players.")
                 break
             
             select_random_player_for_team(db_name, team_id)
@@ -206,11 +206,11 @@ def full_team_draft_players_for_all_teams(db_name):
 
 
 def snake_draft_players_for_all_teams(db_name, salary_cap):
-    print('Snake Draft is called')
+    #print('Snake Draft is called')
     try:
         conn = sqlite3.connect(db_name)
         cursor = conn.cursor()
-        print('db connected')
+        #print('db connected')
 
         # Write a query to get a list of all team IDs
         cursor.execute("SELECT team_id FROM dim_teams;")
@@ -222,7 +222,7 @@ def snake_draft_players_for_all_teams(db_name, salary_cap):
         #num_rounds = num_players_per_team // len(team_ids)
         num_rounds = num_players_per_team
 
-        print(f"team ids: {team_ids}")
+        #print(f"team ids: {team_ids}")
 
         #int(f"num_rounds: {num_rounds}")
 
