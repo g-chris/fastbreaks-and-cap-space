@@ -37,6 +37,12 @@ def initial_draft(league_db_name, salary_cap):
     #data_manager.print_draft_table(league_db_name)
 
 
+def create_season_schedule(league_db_name, season_num, team_count, game_count):
+    #call_season_manager
+    print('Called create_season_schedule')
+
+
+
 #print('create players and teams')
 create_players_and_teams("league01.db", 550, 30)
 

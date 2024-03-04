@@ -184,6 +184,29 @@ def create_team_roster_table(db_name, team_roster):
     conn.commit()
     conn.close()
 
+def create_season_schedule_table (db_name, season_num, team_count, game_count):
+    conn = sqlite3.connect(db_name)
+
+    # Create a cursor object to interact with the database
+    cursor = conn.cursor()
+
+    # Create a table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS fact_season_schedule (
+            game_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            season_id INTEGER,
+            home_team_id INTEGER,
+            away_team_id INTEGER,
+            FOREIGN KEY (home_team_id) REFERENCES dim_teams(team_id),
+            FOREIGN KEY (away_team_id) REFERENCES dim_teams(team_id)
+        )
+    ''')
+
+    # Commit the changes
+    conn.commit()
+
+
+
 #Print tables functions---------------------
 
 def print_player_table(db_name):

@@ -235,6 +235,7 @@ def snake_draft_players_for_all_teams(db_name, salary_cap):
             # Determine the order in which teams will pick in the current round
             if round_num % 2 == 0:
                 draft_order = team_ids[::-1]  # Reverse order for even rounds
+                print(f"Draft Order: {draft_order}")
             else:
                 draft_order = team_ids
 
