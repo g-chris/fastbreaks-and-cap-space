@@ -189,3 +189,13 @@ team_names = [
  'Witchcraft', 'Crimson Plague', 'Archmages', 'Paladins', 'Duskspell', 'Morning Stars', 'Great Axes', 'Dungeon',
  'Pickles', 'First Light', 'Crunk', 'Bass', 'Squirrels', 'Scholars', 'Necromancers', 'Ornothologists'
 ]
+
+
+conferences_and_divisions = [
+    ['Chaos', 'Wildfire'],
+    ['Chaos', 'Blight'],
+    ['Chaos', 'Tempest'],
+    ['Order', 'Stronghold'],
+    ['Order', 'Wisdom'],
+    ['Order', 'Atlantic'],
+]

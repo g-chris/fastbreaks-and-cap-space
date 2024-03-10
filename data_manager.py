@@ -93,15 +93,51 @@ def create_team_table(db_name, teams):
                 team_id, location_name, team_name
             ) VALUES (NULL, ?, ?)
         ''', (
-            team.location_name, team.team_name, 
+            team.location_name, team.team_name 
         ))
 
     # Commit the changes and close the connection
     conn.commit()
     conn.close()
 
+def create_conferences_and_divsions_table(db_name, conferences_and_divisions):
+     # Connect to the SQLite database (or create it if it doesn't exist)
+    conn = sqlite3.connect(db_name)
+
+    # Create a cursor object to interact with the database
+    cursor = conn.cursor()
+
+    # Create a table (example table: dim_teams)
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS dim_conferences_divisions (
+            conf_div_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            conference_name TEXT,
+            division_name TEXT
+        )
+    ''')
+
+    # Commit the changes
+    conn.commit()
+
+    for pairs in conferences_and_divisions:
+        cursor.execute('''
+            INSERT INTO dim_conferences_divisions (
+                conf_div_id, conference_name, division_name
+            ) VALUES (NULL, ?, ?)
+        ''', (
+            pairs[0], pairs[1]
+        ))
+
+    # Commit the changes and close the connection
+    conn.commit()
+    conn.close()
+
+
+
+
 #fact_drafted_players
 def create_draft_table(db_name):
+    
     #print('create_draft_table called')
     # Connect to the SQLite database (or create it if it doesn't exist)
     conn = sqlite3.connect(db_name)

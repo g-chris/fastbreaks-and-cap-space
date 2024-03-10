@@ -3,6 +3,7 @@ import data_manager
 import player_generator
 import team_generator
 import draft_manager
+import names
 import season_manager
 
 
@@ -21,6 +22,8 @@ def create_players_and_teams(league_db_name, player_count, team_count):
     data_manager.drop_table(league_db_name, "fact_team_rosters")
     #Drop schedule
     data_manager.drop_table(league_db_name, "fact_season_schedule")
+    #Drop conferneces and divisions
+    data_manager.drop_table(league_db_name, "dim_conferences_divisions")
 
 
     #Create players and teams
@@ -33,7 +36,10 @@ def create_players_and_teams(league_db_name, player_count, team_count):
     teams = team_generator.generate_teams(team_count)
     #Create team dimension table and load teams into it
     data_manager.create_team_table(league_db_name, teams)
-
+    #Create conferences and divisions
+    conferences_and_divisions = names.conferences_and_divisions
+    data_manager.create_conferences_and_divsions_table(league_db_name, conferences_and_divisions)
+    
 #Assign players to all teams 
 def initial_draft(league_db_name, salary_cap):
     data_manager.create_draft_table(league_db_name)
@@ -46,9 +52,9 @@ def create_season_schedule(league_db_name, season_num, team_count, game_count):
     
     teams = [f"{i}" for i in range(1, team_count + 1)]
 
-    schedule = season_manager.schedule_season(teams, game_count)
+    #schedule = season_manager.schedule_season(teams, game_count)
 
-    data_manager.create_season_schedule_table(league_db_name, season_num, schedule)
+    #data_manager.create_season_schedule_table(league_db_name, season_num, schedule)
 
 
     print('Called create_season_schedule')
