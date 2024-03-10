@@ -3,6 +3,7 @@ import data_manager
 import player_generator
 import team_generator
 import draft_manager
+import season_manager
 
 
 
@@ -18,6 +19,9 @@ def create_players_and_teams(league_db_name, player_count, team_count):
     data_manager.drop_table(league_db_name, "fact_drafted_players")
     #Drop teams rosters
     data_manager.drop_table(league_db_name, "fact_team_rosters")
+    #Drop schedule
+    data_manager.drop_table(league_db_name, "fact_season_schedule")
+
 
     #Create players and teams
 
@@ -39,6 +43,14 @@ def initial_draft(league_db_name, salary_cap):
 
 def create_season_schedule(league_db_name, season_num, team_count, game_count):
     #call_season_manager
+    
+    teams = [f"{i}" for i in range(1, team_count + 1)]
+
+    schedule = season_manager.schedule_season(teams, game_count)
+
+    data_manager.create_season_schedule_table(league_db_name, season_num, schedule)
+
+
     print('Called create_season_schedule')
 
 
@@ -51,6 +63,8 @@ create_players_and_teams("league01.db", 550, 30)
 salary_cap = 150
 
 initial_draft("league01.db", salary_cap)
+
+#create_season_schedule("league01.db", 1, 30, 82)
 
 #data_manager.print_team_table("league01.db")
 

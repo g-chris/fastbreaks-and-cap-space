@@ -184,7 +184,7 @@ def create_team_roster_table(db_name, team_roster):
     conn.commit()
     conn.close()
 
-def create_season_schedule_table (db_name, season_num, team_count, game_count):
+def create_season_schedule_table (db_name, season_num, schedule):
     conn = sqlite3.connect(db_name)
 
     # Create a cursor object to interact with the database
@@ -204,6 +204,22 @@ def create_season_schedule_table (db_name, season_num, team_count, game_count):
 
     # Commit the changes
     conn.commit()
+
+    for game_set in schedule:
+        for home_team, away_team in game_set:
+            cursor.execute('''
+            INSERT INTO fact_season_schedule (
+                game_id, 
+                season_id, 
+                home_team_id,
+                away_team_id
+            ) VALUES (NULL, ?, ?, ?)
+        ''', (season_num, home_team, away_team ))
+
+       
+    # Commit the changes and close the connection
+    conn.commit()
+    conn.close()
 
 
 
