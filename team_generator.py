@@ -2,10 +2,11 @@ import random
 from names import locations, team_names
 
 class Team:
-    def __init__(self, team_id, location_name, team_name):
+    def __init__(self, team_id, location_name, team_name, conf_div_id):
         self.team_id = team_id
         self.location_name = location_name
         self.team_name = team_name
+        self.conf_div_id = conf_div_id
 
 selected_locations = []
 selected_team_names = []
@@ -46,6 +47,12 @@ def pick_team_name():
 
         return entry
 
+def add_conf_div(team_num):
+    if team_num % 2 != 0:
+        return (team_num // 2) % 3 + 4  # Cycle through 4, 5, 6
+    else:
+        return (team_num // 2) % 3 + 1  # Cycle through 1, 2, 3
+
 
 def generate_teams(num_teams):
     teams = []
@@ -54,13 +61,14 @@ def generate_teams(num_teams):
         team_id = team_num
         location_name = pick_location()
         team_name = pick_team_name()
-        team = Team(team_id, location_name, team_name)
+        conf_div_id = add_conf_div(team_num)
+        team = Team(team_id, location_name, team_name, conf_div_id)
         teams.append(team)
     return teams
         
 def print_teams(teams):
     for team in teams:
-        print(f" #{team.team_id} - {team.location_name} {team.team_name}")
+        print(f" #{team.team_id} - {team.location_name} {team.team_name} {team.conf_div_id}")
 
 #For testing
 #teams = generate_teams(30)

@@ -23,7 +23,7 @@ def create_players_and_teams(league_db_name, player_count, team_count):
     #Drop schedule
     data_manager.drop_table(league_db_name, "fact_season_schedule")
     #Drop conferneces and divisions
-    data_manager.drop_table(league_db_name, "dim_conferences_divisions")
+    data_manager.drop_table(league_db_name, "fact_conferences_divisions")
 
 
     #Create players and teams
@@ -32,13 +32,14 @@ def create_players_and_teams(league_db_name, player_count, team_count):
     players = player_generator.generate_roster(player_count, 'normal')
     #Create player dimension table and load players into it
     data_manager.create_player_table(league_db_name, players)
+    #Create conferences and divisions
+    conferences_and_divisions = names.conferences_and_divisions
+    data_manager.create_conferences_and_divsions_table(league_db_name, conferences_and_divisions)
     #Create teams
     teams = team_generator.generate_teams(team_count)
     #Create team dimension table and load teams into it
     data_manager.create_team_table(league_db_name, teams)
-    #Create conferences and divisions
-    conferences_and_divisions = names.conferences_and_divisions
-    data_manager.create_conferences_and_divsions_table(league_db_name, conferences_and_divisions)
+
     
 #Assign players to all teams 
 def initial_draft(league_db_name, salary_cap):

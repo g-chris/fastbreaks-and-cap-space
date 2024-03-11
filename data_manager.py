@@ -75,7 +75,9 @@ def create_team_table(db_name, teams):
         CREATE TABLE IF NOT EXISTS dim_teams (
             team_id INTEGER PRIMARY KEY AUTOINCREMENT,
             location_name TEXT,
-            team_name TEXT
+            team_name TEXT,
+            conf_div_id INTEGER,
+            FOREIGN KEY (conf_div_id) REFERENCES fact_conferences_divisions(conf_div_id)
         )
     ''')
 
@@ -90,10 +92,10 @@ def create_team_table(db_name, teams):
     for team in teams:
         cursor.execute('''
             INSERT INTO dim_teams (
-                team_id, location_name, team_name
-            ) VALUES (NULL, ?, ?)
+                team_id, location_name, team_name, conf_div_id
+            ) VALUES (NULL, ?, ?, ?)
         ''', (
-            team.location_name, team.team_name 
+            team.location_name, team.team_name, team.conf_div_id
         ))
 
     # Commit the changes and close the connection
@@ -109,7 +111,7 @@ def create_conferences_and_divsions_table(db_name, conferences_and_divisions):
 
     # Create a table (example table: dim_teams)
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS dim_conferences_divisions (
+        CREATE TABLE IF NOT EXISTS fact_conferences_divisions (
             conf_div_id INTEGER PRIMARY KEY AUTOINCREMENT,
             conference_name TEXT,
             division_name TEXT
@@ -121,7 +123,7 @@ def create_conferences_and_divsions_table(db_name, conferences_and_divisions):
 
     for pairs in conferences_and_divisions:
         cursor.execute('''
-            INSERT INTO dim_conferences_divisions (
+            INSERT INTO fact_conferences_divisions (
                 conf_div_id, conference_name, division_name
             ) VALUES (NULL, ?, ?)
         ''', (
