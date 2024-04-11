@@ -36,6 +36,12 @@ def schedule_season_v1(num_games, num_teams, host_limit):
     return home_schedule, away_schedule
 
 def schedule_season_v2(league_db_name):
+    #In an 82 game season there will be:
+    # x16 divisional games (4 games x 4 teams)
+    # x24 non-divsional, same conference games (4 games x 6 teams)
+    # x12 non-divisional, same conference games with the remaining team not yet scheduled (3 games x 4 teams)
+    # x30 non-confernece teams (2 games x 15 teams)
+
     print("ok")
 
     
