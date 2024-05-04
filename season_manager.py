@@ -123,6 +123,12 @@ def print_game_counts(home_schedule, away_schedule):
         away_games = len(away_schedule[team])
         print(f"{team}\t{home_games}\t\t{away_games}")
 
+
+
+def schedule_season_v3(db_name):
+    print('schedule_season_v3 called')
+
+
 #For testing
 # num_games = 82
 # num_teams = 30
@@ -135,7 +141,7 @@ def print_game_counts(home_schedule, away_schedule):
 
 
 # Run the scheduling function with a timeout
-schedule = run_schedule_with_timeout()
-if schedule:
-    for team, games in schedule.items():
-        print(f"Team {team}: {games}")
+# schedule = run_schedule_with_timeout()
+# if schedule:
+#     for team, games in schedule.items():
+#         print(f"Team {team}: {games}")
