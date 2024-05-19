@@ -17,8 +17,9 @@ Attributes:
     Defense (DEF):
         Specifically measures a player's defensive skills, including blocking shots, stealing the ball, and overall effectiveness in preventing opponents from scoring.
 
-
-
+    Guards: 50%
+    Forwards: 35%
+    Centers: 15%
 
 50% Guards, 35% Forwards, 15% Centers
 
@@ -37,3 +38,29 @@ Shooting Guard	SHOT, DEX	INT, DEF
 Small Forward	SHOT, CON	INT, DEX
 Power Forward	STR, DEF	DEX, CON
 Center	        STR, DEF	DEX, SHOT
+
+Attributes and Counting Stats Interaction
+STR
++Blocks
++Scoring
+DEX
++Steal
++Scoring
+-Turnovers
+CON
++
+INT
++Assists
++
+SHOT
+DEF
+
+
+
+--Game Play-- 
+
+The whole team has combined attributes used in plays where 100% of the starter's stats contribute, 
+the designated "6th Player" contributes 75% of their stats, and players 7-10 contribute 50%. 
+You can have 15 roster spots and 11-15 will count for salary but not for team score.
+
+It's a team sport!
