@@ -21,6 +21,7 @@ Attributes:
     Forwards: 35%
     Centers: 15%
 
+50% Guards, 35% Forwards, 15% Centers
 
 Overall Score   Salary Cap 	Player Level    Rarity
 48 - 60	        30 - 40%	Superstars	    2.5%
@@ -28,7 +29,6 @@ Overall Score   Salary Cap 	Player Level    Rarity
 24 - 35	        20 - 30%	Starters	    30%
 12 - 23	        15 - 25%	Role-Players	50%
 12 - 40	         5 - 20%	Rookies	        7.5%
-
 
 
 Class Table
