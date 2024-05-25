@@ -128,6 +128,8 @@ def print_game_counts(home_schedule, away_schedule):
 def schedule_season_v3(db_name):
     print('schedule_season_v3 called')
 
+    
+
 
 #For testing
 # num_games = 82

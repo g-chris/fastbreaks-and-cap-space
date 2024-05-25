@@ -134,6 +134,28 @@ def create_conferences_and_divsions_table(db_name, conferences_and_divisions):
     conn.commit()
     conn.close()
 
+def create_season_schedule(db_name):
+     # Connect to the SQLite database (or create it if it doesn't exist)
+    conn = sqlite3.connect(db_name)
+
+    # Create a cursor object to interact with the database
+    cursor = conn.cursor()
+
+    # Create a table (example table: dim_teams)
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS fact_season_schedule (
+            scheduled_game_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            home_team_id INTEGER,
+            away_team_id INTEGER,
+            season_id INTEGER,
+            FOREIGN KEY (home_team_id) REFERENCES dim_teams(team_id),
+            FOREIGN KEY (away_team_id) REFERENCES dim_teams(team_id)                
+        )
+    ''')
+
+    # Commit the changes and close the connection
+    conn.commit()
+    conn.close()
 
 
 

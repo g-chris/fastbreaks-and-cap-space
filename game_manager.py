@@ -48,11 +48,12 @@ def initial_draft(league_db_name, salary_cap):
     #data_manager.print_draft_table(league_db_name)
 
 
-def create_season_schedule(league_db_name, season_num, team_count, game_count):
+def create_season_schedule(league_db_name, year):
+    
+    data_manager.create_season_schedule(league_db_name)
+    
     #call_season_manager
     
-    teams = [f"{i}" for i in range(1, team_count + 1)]
-
     #schedule = season_manager.schedule_season(teams, game_count)
 
     #data_manager.create_season_schedule_table(league_db_name, season_num, schedule)
