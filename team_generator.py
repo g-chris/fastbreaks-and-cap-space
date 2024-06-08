@@ -47,13 +47,25 @@ def pick_team_name():
 
         return entry
 
+# def add_conf_div(team_num):
+#     if team_num % 2 != 0:
+#         return (team_num // 2) % 3 + 4  # Cycle through 4, 5, 6
+#     else:
+#         return (team_num // 2) % 3 + 1  # Cycle through 1, 2, 3
+
 def add_conf_div(team_num):
-    if team_num % 2 != 0:
-        return (team_num // 2) % 3 + 4  # Cycle through 4, 5, 6
+    if team_num <= 5:
+        return(1)
+    if team_num <= 10:
+        return(2)
+    if team_num <=15:
+        return(3)
+    if team_num <= 20:
+        return(4)
+    if team_num <= 25:
+        return(5)
     else:
-        return (team_num // 2) % 3 + 1  # Cycle through 1, 2, 3
-
-
+        return(6)  
 def generate_teams(num_teams):
     teams = []
 
