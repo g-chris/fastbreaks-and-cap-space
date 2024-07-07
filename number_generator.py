@@ -1,3 +1,6 @@
+##DEPRECATED IN FAVOR OF HARDCODED SCHEDULE 
+
+
 import csv
 # Create extended data for the table
 extended_data = []

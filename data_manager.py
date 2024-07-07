@@ -134,31 +134,6 @@ def create_conferences_and_divsions_table(db_name, conferences_and_divisions):
     conn.commit()
     conn.close()
 
-def create_season_schedule(db_name):
-     # Connect to the SQLite database (or create it if it doesn't exist)
-    conn = sqlite3.connect(db_name)
-
-    # Create a cursor object to interact with the database
-    cursor = conn.cursor()
-
-    # Create a table (example table: dim_teams)
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS fact_season_schedule (
-            scheduled_game_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            home_team_id INTEGER,
-            away_team_id INTEGER,
-            season_id INTEGER,
-            FOREIGN KEY (home_team_id) REFERENCES dim_teams(team_id),
-            FOREIGN KEY (away_team_id) REFERENCES dim_teams(team_id)                
-        )
-    ''')
-
-    # Commit the changes and close the connection
-    conn.commit()
-    conn.close()
-
-
-
 #fact_drafted_players
 def create_draft_table(db_name):
     
@@ -244,7 +219,7 @@ def create_team_roster_table(db_name, team_roster):
     conn.commit()
     conn.close()
 
-def create_season_schedule_table (db_name, season_num, schedule):
+def create_season_schedule (db_name, season_num, schedule):
     conn = sqlite3.connect(db_name)
 
     # Create a cursor object to interact with the database
@@ -255,6 +230,7 @@ def create_season_schedule_table (db_name, season_num, schedule):
         CREATE TABLE IF NOT EXISTS fact_season_schedule (
             game_id INTEGER PRIMARY KEY AUTOINCREMENT,
             season_id INTEGER,
+            game_day INTEGER,
             home_team_id INTEGER,
             away_team_id INTEGER,
             FOREIGN KEY (home_team_id) REFERENCES dim_teams(team_id),
@@ -266,15 +242,19 @@ def create_season_schedule_table (db_name, season_num, schedule):
     conn.commit()
 
     for game_set in schedule:
-        for home_team, away_team in game_set:
-            cursor.execute('''
-            INSERT INTO fact_season_schedule (
-                game_id, 
-                season_id, 
-                home_team_id,
-                away_team_id
-            ) VALUES (NULL, ?, ?, ?)
-        ''', (season_num, home_team, away_team ))
+        home_team = game_set[0]
+        away_team = game_set[1]
+        game_day = game_set[2]
+        
+        cursor.execute('''
+        INSERT INTO fact_season_schedule (
+            game_id, 
+            season_id, 
+            game_day,
+            home_team_id,
+            away_team_id
+        ) VALUES (NULL, ?, ?, ?, ?)
+        ''', (season_num, game_day, home_team, away_team ))
 
        
     # Commit the changes and close the connection
