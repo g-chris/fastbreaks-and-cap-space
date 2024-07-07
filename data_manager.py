@@ -1,10 +1,8 @@
 import sqlite3
-#Only imported for testing
-import player_generator
-import team_generator
 
 
 #Create tables functions-------------------
+
 #dim_players
 def create_player_table(db_name, roster):
     # Connect to the SQLite database (or create it if it doesn't exist)
@@ -102,6 +100,7 @@ def create_team_table(db_name, teams):
     conn.commit()
     conn.close()
 
+#fact_conferences_divisions
 def create_conferences_and_divsions_table(db_name, conferences_and_divisions):
      # Connect to the SQLite database (or create it if it doesn't exist)
     conn = sqlite3.connect(db_name)
@@ -219,6 +218,7 @@ def create_team_roster_table(db_name, team_roster):
     conn.commit()
     conn.close()
 
+#fact_season_schedule
 def create_season_schedule (db_name, season_num, schedule):
     conn = sqlite3.connect(db_name)
 
@@ -262,8 +262,8 @@ def create_season_schedule (db_name, season_num, schedule):
     conn.close()
 
 
-
 #Print tables functions---------------------
+#For testing/debugging only
 
 def print_player_table(db_name):
     conn = sqlite3.connect(db_name)
@@ -328,16 +328,4 @@ def drop_table(db_name, table_name):
     # Commit the changes
     conn.commit()
 
-
-#For testing
-#roster = player_generator.generate_roster(80, 'rookies') 
-#create_player_table("league01.db", roster)
-#print_player_table("league01.db")
-#drop_table("league01.db", "dim_teams")
-#teams = team_generator.generate_teams(30)
-#create_team_table("league01.db", teams)    
-#print_team_table("league01.db") 
-#create_draft_table("league01.db")
-
-#drop_table("league01.db", "dim_teams")
     
