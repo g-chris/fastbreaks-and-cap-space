@@ -26,7 +26,7 @@ def assign_position(random_number):
     else:
         return 'Point Guard'
 
-def generate_player_attributes(player_level):
+def generate_player_attributes(player_level, position):
     # Determine overall score based on player level
     if player_level == 'Superstar':
         overall_score = random.randint(48, 60)
@@ -38,16 +38,65 @@ def generate_player_attributes(player_level):
         overall_score = random.randint(12, 23)
     else:  # 'Rookie'
         overall_score = random.randint(12, 40)
-
+    
     # Generate random traits until their sum matches the overall score
-    traits = {
-        'strength': 2,
-        'dexterity': 2,
-        'constitution': 2,
-        'intelligence': 2,
-        'shooting': 2,
-        'defense': 2,
-    }
+    #Starting trait values based on position
+    if position == 'Point Guard':
+        traits = {
+            'strength': 2,
+            'dexterity': 3,
+            'constitution': 1,
+            'intelligence': 3,
+            'shooting': 2,
+            'defense': 1,
+        }
+    elif position == 'Shooting Guard':
+        traits = {
+            'strength': 2,
+            'dexterity': 3,
+            'constitution': 2,
+            'intelligence': 1,
+            'shooting': 3,
+            'defense': 1,
+        }
+    elif position == 'Small Forward':
+        traits = {
+            'strength': 2,
+            'dexterity': 1,
+            'constitution': 3,
+            'intelligence': 1,
+            'shooting': 3,
+            'defense': 2,
+        }
+    elif position == 'Power Forward':
+        traits = {
+            'strength': 3,
+            'dexterity': 1,
+            'constitution': 1,
+            'intelligence': 2,
+            'shooting': 2,
+            'defense': 3,
+        }
+    elif position == 'Center':
+        traits = {
+            'strength': 4,
+            'dexterity': 1,
+            'constitution': 1,
+            'intelligence': 1,
+            'shooting': 1,
+            'defense': 4,
+        }
+    else: #Error catch just in case
+        traits = {
+            'strength': 2,
+            'dexterity': 2,
+            'constitution': 2,
+            'intelligence': 2,
+            'shooting': 2,
+            'defense': 2,
+        }
+
+   
 
     while sum(traits.values()) != overall_score:
         # Randomly select a trait to increment
@@ -96,7 +145,7 @@ def generate_roster(num_players, type):
             player_level = assign_player_level(random_number_level)
         random_number_position = random.randint(1, 100)
         position = assign_position(random_number_position)
-        attributes = generate_player_attributes(player_level)
+        attributes = generate_player_attributes(player_level, position)
         overall_score = sum(attributes.values())
         player_salary = generate_salary(player_level)
         nick_name_number = random.randint(1, 255)

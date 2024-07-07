@@ -37,7 +37,7 @@ Point Guard 	DEX, INT	CON, DEF
 Shooting Guard	SHOT, DEX	INT, DEF
 Small Forward	SHOT, CON	INT, DEX
 Power Forward	STR, DEF	DEX, CON
-Center	        STR, DEF	DEX, SHOT
+Center	        STR+, DEF+	DEX, SHOT, CON-, INT-
 
 Attributes and Counting Stats Interaction
 STR
