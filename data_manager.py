@@ -261,6 +261,46 @@ def create_season_schedule (db_name, season_num, schedule):
     conn.commit()
     conn.close()
 
+#dim_roster_positions
+def create_dim_roster_positions(db_name):
+    # Connect to the SQLite database (or create it if it doesn't exist)
+    conn = sqlite3.connect(db_name)
+
+    # Create a cursor object to interact with the database
+    cursor = conn.cursor()
+
+    # Create a table (example table: dim_teams)
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS dim_roster_positions (
+            roster_position_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            position_name TEXT,
+            team_name TEXT,
+            conf_div_id INTEGER,
+            FOREIGN KEY (conf_div_id) REFERENCES fact_conferences_divisions(conf_div_id)
+        )
+    ''')
+
+    # Commit the changes
+    conn.commit()
+
+    # Assume you have the 'teams' list with team objects
+
+    #teams = team_generator.generate_teams(30)
+
+    # Insert data from the 'roster' list
+    for team in teams:
+        cursor.execute('''
+            INSERT INTO dim_teams (
+                team_id, location_name, team_name, conf_div_id
+            ) VALUES (NULL, ?, ?, ?)
+        ''', (
+            team.location_name, team.team_name, team.conf_div_id
+        ))
+
+    # Commit the changes and close the connection
+    conn.commit()
+    conn.close()
+
 
 #Print tables functions---------------------
 #For testing/debugging only
