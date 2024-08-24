@@ -20,7 +20,7 @@ The roster spots will look like this, where (*) indicates required:
 
 The team score is the average of the stats of all the rostered players on the team.
 
-Starting Positions that have no backup (Bench/Sixth Player) slots filled of the same Position)
+Starting Positions that have no backup (Bench/Sixth Player) slots filled of the same Position
 will receive a penalty of -4 to CON and -2 to all other stats
 to be calculated before the team score average. 
 
