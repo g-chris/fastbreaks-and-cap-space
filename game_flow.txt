@@ -6,10 +6,10 @@ Players will be assigned roster spots on their team.
 
 The roster spots will look like this, where (*) indicates required:
 
-1 - Starting Guard*
-2 - Starting Guard*
-3 - Starting Forward*
-4 - Starting Forward*
+1 - Starting Point Guard*
+2 - Starting Shooting Guard*
+3 - Starting Small Forward*
+4 - Starting Power Forward*
 5 - Starting Center*
 6 - Sixth Player (Any Position)*
 7 - Bench Guard 1

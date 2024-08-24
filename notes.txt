@@ -59,8 +59,17 @@ DEF
 
 --Game Play-- 
 
-The whole team has combined attributes used in plays where 100% of the starter's stats contribute, 
-the designated "6th Player" contributes 75% of their stats, and players 7-10 contribute 50%. 
-You can have 15 roster spots and 11-15 will count for salary but not for team score.
+Overall team attributes are determined by the average of all rostered players.
+
+More rostered players means more offensive positions per quarter.
 
 It's a team sport!
+
+
+
+--Coaching--
+Coach ID
+Name
+Coaching Style
+
+Coaching styles can be "Offensive" , "Defensive" or "Balanced"
