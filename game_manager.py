@@ -68,6 +68,9 @@ def game_start(salary_cap):
     #Step 2 - Create the season schedule where 1 is the season number (first season)
     create_season_schedule("league01.db", 1)
 
+    #Step 3 - Load drafted players into rosters
+    
+
 
 #Start game with default salary_cap (150)
 game_start(150)
