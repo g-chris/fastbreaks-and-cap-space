@@ -193,8 +193,9 @@ def create_team_roster_table(db_name, team_roster):
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS fact_team_rosters (
             roster_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            player_id INTEGER,
             team_id INTEGER,
+            roster_spot_id INTEGER,
+            player_id INTEGER,
             FOREIGN KEY (player_id) REFERENCES dim_players(player_id),
             FOREIGN KEY (team_id) REFERENCES dim_teams(team_id)
         )
@@ -208,7 +209,7 @@ def create_team_roster_table(db_name, team_roster):
     for players in team_roster:
         cursor.execute('''
             INSERT INTO fact_team_rosters (
-                roster_id, player_id, team_id
+                roster_id, team_id, roster_spot_id, player_id
             ) VALUES (NULL, ?, ?)
         ''', (
             team_roster.player_id, team_roster.team_id 
