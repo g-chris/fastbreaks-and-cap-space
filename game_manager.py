@@ -24,11 +24,13 @@ def create_players_and_teams(league_db_name, player_count, team_count):
     data_manager.drop_table(league_db_name, "fact_season_schedule")
     #Drop conferneces and divisions
     data_manager.drop_table(league_db_name, "fact_conferences_divisions")
+    #Drop player transaction table
+    data_manager.drop_table(league_db_name, "dim_player_transactions")
 
 
     #Create players and teams
 
-    #Create players - second argurment as 'rookies' creates a rookie class, any other value produces all palyer classes
+    #Create players - second argurment as 'rookies' creates a rookie class, any other value produces all player classes
     players = player_generator.generate_roster(player_count, 'normal')
     #Create player dimension table and load players into it
     data_manager.create_player_table(league_db_name, players)
@@ -39,6 +41,8 @@ def create_players_and_teams(league_db_name, player_count, team_count):
     teams = team_generator.generate_teams(team_count)
     #Create team dimension table and load teams into it
     data_manager.create_team_table(league_db_name, teams)
+    #Create player transaction table
+    data_manager.create_player_transaction_table(league_db_name)
 
     
 #Assign players to all teams 

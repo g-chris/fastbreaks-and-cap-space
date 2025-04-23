@@ -1,5 +1,6 @@
 import sqlite3
 import random
+import data_manager
 
 
 #Initial draft functions-------------------------------------
@@ -176,6 +177,10 @@ def select_best_position_player_for_team(db_name, team_id, round_num, num_player
         #print(f"Team {team_id} drafted Player {player_id}")
         conn.commit()
 
+        #Insert Draft pick into dim_player_transactions
+        data_manager.insert_player_transaction(db_name, player_id, team_id, "DRAFT","2025-00" )
+
+
 
 def full_team_draft_players_for_all_teams(db_name):
 
@@ -204,7 +209,7 @@ def full_team_draft_players_for_all_teams(db_name):
     # Close the connection
     conn.close()
 
-
+#Current draft strategy in use
 def snake_draft_players_for_all_teams(db_name, salary_cap):
     #print('Snake Draft is called')
     try:

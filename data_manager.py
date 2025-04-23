@@ -302,6 +302,54 @@ def create_dim_roster_positions(db_name):
     conn.commit()
     conn.close()
 
+def create_player_transaction_table(db_name):
+     # Connect to the SQLite database (or create it if it doesn't exist)
+    conn = sqlite3.connect(db_name)
+
+    # Create a cursor object to interact with the database
+    cursor = conn.cursor()
+
+    # Create a table (example table: dim_teams)
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS dim_player_transactions (
+            transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            player_id INTEGER,
+            team_id INTEGER,
+            transaction_type TEXT,
+            transaction_date TEXT,
+            etl_current_flag BOOLEAN,
+            FOREIGN KEY (player_id) REFERENCES dim_players(player_id),
+            FOREIGN KEY (team_id) REFERENCES dim_teams(team_id)
+        )
+    ''')
+
+    # Commit the changes
+    conn.commit()
+    conn.close()
+
+def insert_player_transaction(db_name, player_id, team_id, transaction_type, transaction_date):
+    import sqlite3
+
+    conn = sqlite3.connect(db_name)
+    cursor = conn.cursor()
+
+    # Set previous records for this player to etl_current_flag = False
+    cursor.execute('''
+        UPDATE dim_player_transactions
+        SET etl_current_flag = 0
+        WHERE player_id = ? AND etl_current_flag = 1
+    ''', (player_id,))
+
+    # Insert new transaction with etl_current_flag = True
+    cursor.execute('''
+        INSERT INTO dim_player_transactions (
+            player_id, team_id, transaction_type, transaction_date, etl_current_flag
+        ) VALUES (?, ?, ?, ?, 1)
+    ''', (player_id, team_id, transaction_type, transaction_date))
+
+    conn.commit()
+    conn.close()
+
 
 #Print tables functions---------------------
 #For testing/debugging only
