@@ -5,8 +5,13 @@ import player_generator
 import team_generator
 import draft_manager
 import names
+import season_manager
 
+starting_year = 2025
 
+league_db_name = "league01.db"
+
+salary_cap = 150
 
 def create_players_and_teams(league_db_name, player_count, team_count):
     
@@ -43,13 +48,11 @@ def create_players_and_teams(league_db_name, player_count, team_count):
     data_manager.create_team_table(league_db_name, teams)
     #Create player transaction table
     data_manager.create_player_transaction_table(league_db_name)
-
     
 #Assign players to all teams 
-def initial_draft(league_db_name, salary_cap):
+def initial_draft(league_db_name, salary_cap, starting_year):
     data_manager.create_draft_table(league_db_name)
-    draft_manager.snake_draft_players_for_all_teams(league_db_name, salary_cap)
-
+    draft_manager.snake_draft_players_for_all_teams(league_db_name, salary_cap, starting_year)
 
 def create_season_schedule(league_db_name, season_number):
     
@@ -62,25 +65,23 @@ def create_season_schedule(league_db_name, season_number):
 
     data_manager.create_season_schedule(league_db_name, season_number, schedule)
 
-def game_start(salary_cap):
+def game_init(league_db_name, salary_cap, starting_year):
     #Step 0 - Create a league with 550 players and 30 teams
-    create_players_and_teams("league01.db", 550, 30)
+    create_players_and_teams(league_db_name, 550, 30)
 
     #Step 1 - Draft the players to all 30 teams
-    initial_draft("league01.db", salary_cap)
+    initial_draft(league_db_name, salary_cap, starting_year)
 
-    #Step 2 - Create the season schedule where 1 is the season number (first season)
-    create_season_schedule("league01.db", 1)
-
-    #Step 3 - Load drafted players into rosters
+    #Step 2 - Create the season schedule where 2025 is the season number (first season)
+    create_season_schedule(league_db_name, starting_year)
     
 
 
 #Start game with default salary_cap (150)
-game_start(150)
+game_init(league_db_name, salary_cap, starting_year)
 
 
-
+season_manager.run_season_schedule(league_db_name, starting_year)
 
 
 

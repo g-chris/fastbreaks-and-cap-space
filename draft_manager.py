@@ -33,7 +33,7 @@ def select_random_player_for_team(db_name, team_id):
         #print(f"Team {team_id} drafted Player {player_id}")
         conn.commit()
 
-def select_best_position_player_for_team(db_name, team_id, round_num, num_players_per_team, salary_cap):
+def select_best_position_player_for_team(db_name, team_id, round_num, num_players_per_team, salary_cap, starting_year):
     # Connect to the database
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
@@ -178,7 +178,8 @@ def select_best_position_player_for_team(db_name, team_id, round_num, num_player
         conn.commit()
 
         #Insert Draft pick into dim_player_transactions
-        data_manager.insert_player_transaction(db_name, player_id, team_id, "DRAFT","2025-00" )
+        transaction_date = f"{starting_year}-000"
+        data_manager.insert_player_transaction(db_name, player_id, team_id, "DRAFT",transaction_date)
 
 
 
@@ -210,7 +211,7 @@ def full_team_draft_players_for_all_teams(db_name):
     conn.close()
 
 #Current draft strategy in use
-def snake_draft_players_for_all_teams(db_name, salary_cap):
+def snake_draft_players_for_all_teams(db_name, salary_cap, starting_year):
     #print('Snake Draft is called')
     try:
         conn = sqlite3.connect(db_name)
@@ -249,7 +250,7 @@ def snake_draft_players_for_all_teams(db_name, salary_cap):
             # Loop through each team in the draft order
             for team_id in draft_order:
                 #Select one player per team
-                select_best_position_player_for_team(db_name, team_id, round_num, num_players_per_team, salary_cap)
+                select_best_position_player_for_team(db_name, team_id, round_num, num_players_per_team, salary_cap, starting_year)
                 #select_random_player_for_team(db_name, team_id)
 
 
