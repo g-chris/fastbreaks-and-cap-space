@@ -1,5 +1,6 @@
 #Initial test to sim a starting draft
 import data_manager
+import game_data_manager
 import csv
 import player_generator
 import team_generator
@@ -31,6 +32,8 @@ def create_players_and_teams(league_db_name, player_count, team_count):
     data_manager.drop_table(league_db_name, "fact_conferences_divisions")
     #Drop player transaction table
     data_manager.drop_table(league_db_name, "dim_player_transactions")
+    #Drop game results table
+    data_manager.drop_table(league_db_name, "fact_game_results")
 
 
     #Create players and teams
@@ -48,6 +51,8 @@ def create_players_and_teams(league_db_name, player_count, team_count):
     data_manager.create_team_table(league_db_name, teams)
     #Create player transaction table
     data_manager.create_player_transaction_table(league_db_name)
+    #Create game results table
+    game_data_manager.create_fact_game_results(league_db_name)
     
 #Assign players to all teams 
 def initial_draft(league_db_name, salary_cap, starting_year):

@@ -1,5 +1,6 @@
 import sqlite3
 import game_sim_engine
+import game_data_manager
 
 def create_team_roster_view(conn, team_id):
     cursor = conn.cursor()
@@ -23,7 +24,8 @@ def create_team_roster_view(conn, team_id):
     """)
     conn.commit()
 
-def simulate_game(game_id, game_day, home_team_id, away_team_id, conn):
+def simulate_game(game_id, game_day, home_team_id, away_team_id, db_name, current_season):
+    conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
 
     # Get team names from dim_teams
@@ -35,9 +37,23 @@ def simulate_game(game_id, game_day, home_team_id, away_team_id, conn):
     home_team_name = f"{home_team[0]} {home_team[1]}"
     away_team_name = f"{away_team[0]} {away_team[1]}"
 
-    home_score, away_score = game_sim_engine.game_sim(home_team_id, away_team_id, conn)
+    home_score, away_score, ot_count = game_sim_engine.game_sim(home_team_id, away_team_id, conn)
 
-    print(f"Day {game_day} | Game {game_id}: {away_team_name} {away_score} @ {home_team_name} {home_score}")
+    if home_score > away_score:
+        winner_team_id = home_team_id
+    else:
+        winner_team_id = away_team_id
+    
+    game_data_manager.record_game_results(db_name, game_id, current_season, game_day, home_team_id, away_team_id,
+                                          home_score, away_score, winner_team_id, ot_count)
+
+    if ot_count == 0:
+        print(f"Day {game_day} | Game {game_id}: {away_team_name} {away_score} @ {home_team_name} {home_score}")
+    else:
+        print(f"Day {game_day} | Game {game_id}: {away_team_name} {away_score} @ {home_team_name} {home_score} OT:{ot_count}")
+
+
+  
 
 
 def run_season_schedule(db_name, current_season):
@@ -62,6 +78,6 @@ def run_season_schedule(db_name, current_season):
         create_team_roster_view(conn, away_team_id)
 
         # Simulate the game
-        simulate_game(game_id, game_day, home_team_id, away_team_id, conn)
+        simulate_game(game_id, game_day, home_team_id, away_team_id, db_name, current_season)
 
     conn.close()
