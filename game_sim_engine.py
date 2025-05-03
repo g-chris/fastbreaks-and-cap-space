@@ -29,11 +29,11 @@ def game_sim(home_team_id, away_team_id, conn):
         home_score = home_score + round(random.randint(5, 20)/2)
         away_score = away_score + round(random.randint(1, 20)/2)
 
-        if ot_count == 5:
-            if random.randint(1, 2) == 1:
-                home_score = home_score + 1
-            else:
-                away_score = away_score + 1
+        # if ot_count == 5:
+        #     if random.randint(1, 2) == 1:
+        #         home_score = home_score + 1
+        #     else:
+        #         away_score = away_score + 1
         
     return home_score, away_score, ot_count
 

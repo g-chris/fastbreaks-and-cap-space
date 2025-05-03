@@ -187,7 +187,8 @@ team_names = [
 'Beat', 'Vibe', 'Discovery', 'Yetis', 'Legacy', 'Rattlesnakes', 'Blizzards', 'Leopards','Wave', 'Pioneers',
  'Sorcery', 'Druids', 'Fighters', 'Clerics', 'Mana', 'Goblins', 'Trolls', 'Mountain Orcs', 'Dragonborns', 'Guildmasters',
  'Witchcraft', 'Crimson Plague', 'Archmages', 'Paladins', 'Duskspell', 'Morning Stars', 'Great Axes', 'Dungeon',
- 'Pickles', 'First Light', 'Crunk', 'Bass', 'Squirrels', 'Scholars', 'Necromancers', 'Ornithologists'
+ 'Pickles', 'First Light', 'Crunk', 'Bass', 'Squirrels', 'Scholars', 'Necromancers', 'Ornithologists', 
+ 'Knife-Ears', 'Green Bellies' 
 ]
 
 

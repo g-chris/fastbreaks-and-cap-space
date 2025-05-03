@@ -1,3 +1,7 @@
+Gameplay ideas:
+- "Hard" wins vs "Soft" wins where a hard win would be a championship but soft win would be like not getting fired over X seasons/making it to the playoffs
+- Remove the "fantasty slur" team names as a random event as society improves
+
 Attributes:
     Strength (STR):
         Represents physical power, ability to power through defenders, and effectiveness in the post.
@@ -73,3 +77,6 @@ Name
 Coaching Style
 
 Coaching styles can be "Offensive" , "Defensive" or "Balanced"
+
+
+
