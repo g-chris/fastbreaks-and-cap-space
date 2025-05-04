@@ -19,6 +19,7 @@ def create_fact_game_results(db_name):
     home_score INTEGER,
     away_score INTEGER,
     winner_team_id INTEGER,
+    losing_team_id INTEGER,
     ot_count INTEGER,
     FOREIGN KEY (home_team_id) REFERENCES dim_teams(team_id),
     FOREIGN KEY (away_team_id) REFERENCES dim_teams(team_id)
@@ -28,10 +29,8 @@ def create_fact_game_results(db_name):
     # Commit the changes
     conn.commit()
 
-
-
 def record_game_results(db_name, game_id, season_id, game_day,
-                        home_team_id, away_team_id, home_score, away_score, winner_team_id, ot_count):
+                        home_team_id, away_team_id, home_score, away_score, winner_team_id, losing_team_id, ot_count):
      
       # Connect to the SQLite database (or create it if it doesn't exist)
     conn = sqlite3.connect(db_name)
@@ -42,12 +41,13 @@ def record_game_results(db_name, game_id, season_id, game_day,
 
     cursor.execute('''
             INSERT INTO fact_game_results (
-                game_id, season_id, game_day, home_team_id, away_team_id, home_score, away_score, winner_team_id, ot_count
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                game_id, season_id, game_day, home_team_id, away_team_id, home_score, away_score, winner_team_id, losing_team_id, ot_count
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
-            game_id, season_id, game_day, home_team_id, away_team_id, home_score, away_score, winner_team_id, ot_count
+            game_id, season_id, game_day, home_team_id, away_team_id, home_score, away_score, winner_team_id, losing_team_id, ot_count
         ))
 
     # Commit the changes and close the connection
     conn.commit()
     conn.close()
+

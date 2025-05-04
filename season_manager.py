@@ -2,6 +2,64 @@ import sqlite3
 import game_sim_engine
 import game_data_manager
 
+def create_standings_view(db_name):
+    conn = sqlite3.connect(db_name)
+    cursor = conn.cursor()
+    view_name = "conference_standings"
+    
+    # Drop the view if it exists
+    cursor.execute(f"DROP VIEW IF EXISTS {view_name}")
+    
+    # Create a new view from dim_player_transactions
+    cursor.execute(f"""
+                CREATE VIEW {view_name} AS
+SELECT 
+    wins.year,
+    ROW_NUMBER() OVER (
+        PARTITION BY wins.conference_name, wins.year 
+        ORDER BY wins.wins DESC, wins.win_diff DESC
+    ) AS conference_standing,
+    wins.conference_name,
+    wins.location_name,
+    wins.team_name,
+    wins.wins,
+    losses.losses,
+    wins.win_diff
+FROM (
+    SELECT 
+        fact_game_results.season_id AS year,
+        winner_team_id,
+        COUNT(*) AS wins,
+        SUM(
+            CASE 
+                WHEN home_score > away_score THEN home_score - away_score
+                ELSE away_score - home_score
+            END
+        ) AS win_diff,
+        dim_teams.location_name,
+        dim_teams.team_name,
+        dim_conferences_divisions.conference_name,
+        dim_conferences_divisions.division_name
+    FROM fact_game_results
+    LEFT JOIN dim_teams ON dim_teams.team_id = fact_game_results.winner_team_id
+    LEFT JOIN dim_conferences_divisions ON dim_teams.conf_div_id = dim_conferences_divisions.conf_div_id
+    GROUP BY year, winner_team_id, location_name, team_name, conference_name, division_name
+) AS wins
+LEFT JOIN (
+    SELECT 
+        fact_game_results.season_id AS year,
+        losing_team_id,
+        COUNT(*) AS losses
+    FROM fact_game_results
+    GROUP BY year, losing_team_id
+) AS losses
+ON wins.winner_team_id = losses.losing_team_id
+ORDER BY wins.year DESC, wins.conference_name DESC, conference_standing;
+
+    """)
+    conn.commit()
+
+
 def create_team_roster_view(conn, team_id):
     cursor = conn.cursor()
     view_name = f"team_{team_id}_roster"
@@ -41,11 +99,13 @@ def simulate_game(game_id, game_day, home_team_id, away_team_id, db_name, curren
 
     if home_score > away_score:
         winner_team_id = home_team_id
+        losing_team_id = away_team_id
     else:
         winner_team_id = away_team_id
+        losing_team_id = home_team_id
     
     game_data_manager.record_game_results(db_name, game_id, current_season, game_day, home_team_id, away_team_id,
-                                          home_score, away_score, winner_team_id, ot_count)
+                                          home_score, away_score, winner_team_id, losing_team_id, ot_count)
 
     if ot_count == 0:
         print(f"Day {game_day} | Game {game_id}: {away_team_name} {away_score} @ {home_team_name} {home_score}")
@@ -53,8 +113,7 @@ def simulate_game(game_id, game_day, home_team_id, away_team_id, db_name, curren
         print(f"Day {game_day} | Game {game_id}: {away_team_name} {away_score} @ {home_team_name} {home_score} OT:{ot_count}")
 
 
-  
-
+    return winner_team_id
 
 def run_season_schedule(db_name, current_season):
     conn = sqlite3.connect(db_name)
@@ -81,3 +140,33 @@ def run_season_schedule(db_name, current_season):
         simulate_game(game_id, game_day, home_team_id, away_team_id, db_name, current_season)
 
     conn.close()
+
+def run_playoff_series(db_name, high_seed_id, low_seed_id, current_season):
+
+    high_seed_wins = 0
+    low_seed_wins = 0
+    high_seed_homecourt = [0,1,4,6]
+
+    while high_seed_wins < 4 and low_seed_wins < 4:
+        game_id = int(str(high_seed_id) + str('00')+str(low_seed_id) + str(high_seed_wins+low_seed_wins+1))
+        game_day = 'null'
+        if high_seed_wins + low_seed_wins in high_seed_homecourt:
+            game_winner_id = simulate_game(game_id, game_day,high_seed_id, low_seed_id, db_name, current_season)
+            if game_winner_id == high_seed_id:
+                high_seed_wins = high_seed_wins + 1
+            else:
+                low_seed_wins = low_seed_wins + 1
+        else:
+            game_winner_id = simulate_game(game_id, game_day,low_seed_id, high_seed_id, db_name, current_season)
+            if game_winner_id == high_seed_id:
+                high_seed_wins = high_seed_wins + 1
+            else:
+                low_seed_wins = low_seed_wins + 1
+    
+    if high_seed_wins > low_seed_wins:
+        series_winning_team_id = high_seed_id
+    else:
+        series_winning_team_id = low_seed_id
+
+    return series_winning_team_id
+

@@ -70,7 +70,7 @@ last_names = [
     'Tempranillo', 'Sangiovese', 'Nebbiolo', 'Barbera', 'Gamay', 'Carmenere', 'Petit Verdot',
     'Petite Sirah', 'Grüner Veltliner', 'Moscato', 'Prosecco', 'Champagne', 'Cabernet Franc',
     'Muscat', 'Shiraz', 'Grenache', 'Verdejo', 'Albariño', 'Semillon', 'Roussanne', 'Marsanne',
-    'Viura', 'Corvina', 'Rondinella', 'Molinara', 'Negroamaro', 'Primitivo', 'Aglianico', 'Fiano',
+    'Viura', 'Corvina', 'Rondinella', 'Molinara', 'Primitivo', 'Aglianico', 'Fiano',
     'Vermentino', 'Aligoté', 'Cinsault', 'Carignan', 'Glera', 'Tannat', 'Montepulciano', 'Cannonau','Champagne', 'Sapphire', 'Emerald', 'Opal', 'Mocha', 'Platinum', 'Pearl', 'Crimson', 'Lavender',
     'Aqua', 'Rosegold', 'Ivory', 'Mauve', 'Obsidian', 'Goldenrod', 'Sunshine', 'Breeze', 'Storm', 'Calm', 'Fog', 'Blizzard', 'Heatwave', 'Drizzle', 'Tornado', 'Hail',
     'Drought', 'Rainbow', 'Sleet', 'Mist', 'Thunder', 'Cyclone', 'Chill', 'Monsoon', 'Haze', 'Gale', 'Popović', 'Ivanović', 'Stojanović', 'Jovanović', 'Nikolić', 'Đorđević', 'Kovačević', 'Petrović', 'Marković', 'Vuković',
@@ -83,7 +83,57 @@ last_names = [
     'Anderson', 'Thomas', 'Jackson', 'White', 'Harris', 'Martin', 'Thompson', 'Garcia', 'Martinez', 'Jones',
     'Davis', 'Miller', 'Wilson', 'Moore', 'Taylor', 'Anderson', 'Thomas', 'Jackson', 'White', 'Harris',
     'Martin', 'Thompson', 'Garcia', 'Martinez', 'Robinson', 'Clark', 'Lewis', 'Lee', 'Walker', 'Hall',
-    'Allen', 'Young', 'Hill', 'Wright', 'Scott', 'Adams', 'Evans', 'Ford', 'Dixon', 'Zzyzx'
+    'Allen', 'Young', 'Hill', 'Wright', 'Scott', 'Adams', 'Evans', 'Ford', 'Dixon', 'Zzyzx', 'Smith','Johnson','Williams','Brown','Jones','Garcia','Miller','Davis','Rodriguez','Martinez',
+    'Hernandez','Lopez','Gonzalez','Wilson','Anderson','Thomas','Taylor','Moore','Jackson','Martin',
+    'Lee','Perez','Thompson','White','Harris','Sanchez','Clark','Ramirez','Lewis','Robinson',
+    'Walker','Young','Allen','King','Wright','Scott','Torres','Nguyen','Hill','Flores',
+    'Green','Adams','Nelson','Baker','Hall','Rivera','Campbell','Mitchell','Carter','Roberts',
+    'Gomez','Phillips','Evans','Turner','Diaz','Parker','Cruz','Edwards','Collins','Reyes',
+    'Stewart','Morris','Morales','Murphy','Cook','Rogers','Gutierrez','Ortiz','Morgan','Cooper',
+    'Reed','Bailey','Bell','Kelly','Howard','Ward','Cox','Richardson','Wood','Watson',
+    'Brooks','Bennett','Gray','James','Griffin','Mendoza','Sullivan','Russell','Jenkins','Perry',
+    'Butler','Barnes','Fisher','Henderson','Coleman','Simmons','Patterson','Jordan','Reynolds','Hamilton',
+    'Graham','Kim','Gonzales','Alexander','Ramos','Wallace','West','Cole','Hayes','Chavez',
+    'Gibson','Bryant','Ellis','Stevens','Murray','Ford','Marshall','Owens','Mcdonald','Harrison',
+    'Ruiz','Kennedy','Wells','Alvarez','Woods','Castillo','Olson','Webb','Washington','Tucker',
+    'Freeman','Burns','Henry','Vasquez','Snyder','Simpson','Crawford','Jimenez','Porter','Mason',
+    'Shaw','Gordon','Wagner','Hunter','Romero','Hicks','Dixon','Hunt','Palmer','Robertson',
+    'Black','Holmes','Stone','Meyer','Boyd','Mills','Warren','Fox','Rose','Rice',
+    'Moreno','Schmidt','Patel','Ferguson','Nichols','Herrera','Medina','Ryan','Fernandez','Weaver',
+    'Daniels','Stephens','Gardner','Payne','Kelley','Dunn','Pierce','Arnold','Tran','Spencer',
+    'Peters','Hawkins','Grant','Hansen','Castro','Hoffman','Hart','Elliott','Cunningham','Knight',
+    'Bradley','Carroll','Hudson','Duncan','Armstrong','Berry','Andrews','Johnston','Ray','Lane',
+    'Riley','Carpenter','Perkins','Aguilar','Silva','Richards','Willis','Matthews','Chapman','Lawrence',
+    'Garza','Vargas','Watkins','Wheeler','Larson','Carlson','Harper','George','Greene','Burke',
+    'Guzman','Morrison','Munoz','Jacobs','Obrien','Lawson','Franklin','Lynch','Bishop','Carr',
+    'Salazar','Austin','Mendez','Gilbert','Jensen','Williamson','Montgomery','Harvey','Oliver','Howell',
+    'Dean','Hanson','Weber','Garrett','Sims','Burton','Fuller','Soto','Mccoy','Welch',
+    'Chen','Schultz','Walters','Reid','Fields','Walsh','Little','Fowler','Bowman','Davidson',
+    'May','Day','Schneider', 'Moon','Baxter','Buck','Delgado','Pena','Sandoval','Salinas','Avila','Aguilera','Gallegos',
+    'Velasquez','Rosales','Rangel','Hester','Macdonald','Kemp','Rollins','Brady','Clayton','Pace',
+    'English','Pope','Swanson','Stokes','Valentine','Marsh','Horne','Vinson','Huffman','Finley',
+    'Dalton','Mcmahon','Blevins','Bentley','Shepherd','Mayo','Duke','Galloway','Key','Mcclain',
+    'Mathews','Barrera','Dorsey','Bullock','Hodge','Juarez','Stark','Ochoa','Britt','Browning',
+    'Mercado','Murillo','Lara','Welker','Workman','Compton','Marks','Pitts','Cantrell','Bauer',
+    'Justice','Trujillo','Becker','Hutchinson','Hodge','Golden','Cain','Shaffer','Short','Wiggins',
+    'Chandler','Sellers','Maddox','Pugh','Vaughan','Rush','Hobbs','Odom','Henson','Bass',
+    'Jefferson','Chaplain','Terry','Riggs','Frye','Shields','Buckley','Pollard','Zuniga','Schaefer',
+    'Frost','Lester','Winters','Marks','Glass','Middleton','Branch','Abbott','Carrillo','Allison',
+    'Atkinson','England','Villegas','Triplett','Osborn','Mercer','Rowe','Foley','Knox','Roth',
+    'Nash','Summers','Wilkins','Melton','Pacheco','Sharp','Hickman','Mejia','Randolph','Baird',
+    'Haney','Velez','Hurst','Nixon','Shepard','Salas','Petty','Avery','Grimes','Gillespie',
+    'Mckay','Barlow','Bird','Dodson','Everett','Kirk','Gentry','Acevedo','Cervantes','Monroe',
+    'Moses','Crosby','Petersen','Garrison','Estrada','Bernard','Velazquez','Page','Mcgee','Wilkerson',
+    'Dyer','Holland','Case','Sanford','Stanton','Snider','Rosario','Bright','Randall','Delaney',
+    'Sears','Rasmussen','Hutchins','Hardin','Finch','Zhang','Molina','Carson','Cobb','Bowers',
+    'Leon','Barrera','Boyle','Joyce','Harmon','Hodge','Hurley','Valenzuela','Mueller','Wynn',
+    'Murrell','Mclaughlin','Calhoun','Church','Sexton','Conley','Logan','Fischer','Dominguez','Slater',
+    'Guthrie','Stuart','Cervantes','Lindsay','Kinney','Wilcox','Melendez','Pitts','Reeves','Herman',
+    'Blankenship','Knapp','Kline','Barry','Rios','Lucas','Benton','Blackwell','Yates','Norton',
+    'Mcconnell','Snow','Stein','Kerr','Marks','Riggs','Cantu','Hanna','Weeks','Carver',
+    'Trevino','Mcfarland','Landry','Dominguez','Casey','Davenport','Barron','Albert','David','Rosales'
+
+
 ]
 
 nick_names = [
@@ -188,7 +238,7 @@ team_names = [
  'Sorcery', 'Druids', 'Fighters', 'Clerics', 'Mana', 'Goblins', 'Trolls', 'Mountain Orcs', 'Dragonborns', 'Guildmasters',
  'Witchcraft', 'Crimson Plague', 'Archmages', 'Paladins', 'Duskspell', 'Morning Stars', 'Great Axes', 'Dungeon',
  'Pickles', 'First Light', 'Crunk', 'Bass', 'Squirrels', 'Scholars', 'Necromancers', 'Ornithologists', 
- 'Knife-Ears', 'Green Bellies' 
+ 'Knife-Ears', 'Bolts'
 ]
 
 

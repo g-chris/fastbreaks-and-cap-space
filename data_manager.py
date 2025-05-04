@@ -75,7 +75,7 @@ def create_team_table(db_name, teams):
             location_name TEXT,
             team_name TEXT,
             conf_div_id INTEGER,
-            FOREIGN KEY (conf_div_id) REFERENCES fact_conferences_divisions(conf_div_id)
+            FOREIGN KEY (conf_div_id) REFERENCES dim_conferences_divisions(conf_div_id)
         )
     ''')
 
@@ -100,7 +100,7 @@ def create_team_table(db_name, teams):
     conn.commit()
     conn.close()
 
-#fact_conferences_divisions
+#dim_conferences_divisions
 def create_conferences_and_divsions_table(db_name, conferences_and_divisions):
      # Connect to the SQLite database (or create it if it doesn't exist)
     conn = sqlite3.connect(db_name)
@@ -110,7 +110,7 @@ def create_conferences_and_divsions_table(db_name, conferences_and_divisions):
 
     # Create a table (example table: dim_teams)
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS fact_conferences_divisions (
+        CREATE TABLE IF NOT EXISTS dim_conferences_divisions (
             conf_div_id INTEGER PRIMARY KEY AUTOINCREMENT,
             conference_name TEXT,
             division_name TEXT
@@ -122,7 +122,7 @@ def create_conferences_and_divsions_table(db_name, conferences_and_divisions):
 
     for pairs in conferences_and_divisions:
         cursor.execute('''
-            INSERT INTO fact_conferences_divisions (
+            INSERT INTO dim_conferences_divisions (
                 conf_div_id, conference_name, division_name
             ) VALUES (NULL, ?, ?)
         ''', (
@@ -277,7 +277,7 @@ def create_dim_roster_positions(db_name):
             position_name TEXT,
             team_name TEXT,
             conf_div_id INTEGER,
-            FOREIGN KEY (conf_div_id) REFERENCES fact_conferences_divisions(conf_div_id)
+            FOREIGN KEY (conf_div_id) REFERENCES dim_conferences_divisions(conf_div_id)
         )
     ''')
 

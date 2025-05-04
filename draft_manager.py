@@ -10,8 +10,6 @@ def select_random_player_for_team(db_name, team_id):
     cursor = conn.cursor()
 
     # Write a query to select a player who is not already drafted by any team
-    # and meets any other criteria you have (e.g., player level, position, etc.)
-    # Note: You might need a more complex query based on your requirements.
     query = """
         SELECT player_id
         FROM dim_players
