@@ -44,6 +44,7 @@ FROM (
     FROM fact_game_results
     LEFT JOIN dim_teams ON dim_teams.team_id = fact_game_results.winner_team_id
     LEFT JOIN dim_conferences_divisions ON dim_teams.conf_div_id = dim_conferences_divisions.conf_div_id
+    WHERE fact_game_results.game_day != 'null'
     GROUP BY year, winner_team_id, location_name, team_name, conference_name, division_name
 ) AS wins
 LEFT JOIN (
@@ -52,11 +53,11 @@ LEFT JOIN (
         losing_team_id,
         COUNT(*) AS losses
     FROM fact_game_results
+    WHERE fact_game_results.game_day != 'null'
     GROUP BY year, losing_team_id
 ) AS losses
 ON wins.winner_team_id = losses.losing_team_id
 ORDER BY wins.year DESC, wins.conference_name DESC, conference_standing;
-
     """)
     conn.commit()
 
