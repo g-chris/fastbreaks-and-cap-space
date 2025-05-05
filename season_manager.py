@@ -231,9 +231,5 @@ def run_post_season(db_name, current_season):
 
     return finals_winner
 
-#playoff_bracket("league01.db", "2025")
-#run_post_season("league01.db", "2025")
-winner = run_post_season("league01.db", "2025")
 
 
-print("Winning Team is", winner)

@@ -82,20 +82,18 @@ def game_init(league_db_name, salary_cap, starting_year):
     
 
 
-#Start game with default salary_cap (150)
-game_init(league_db_name, salary_cap, starting_year)
+#Start game with default salary_cap (150)]
 
+game_init(league_db_name, salary_cap, starting_year)
 
 season_manager.run_season_schedule(league_db_name, starting_year)
 
 season_manager.create_standings_view(league_db_name)
 
-#winning_id = season_manager.run_playoff_series(league_db_name, 1, 30, starting_year)
-
-#print(f"Team {winning_id} wins!")
+winner = season_manager.run_post_season("league01.db", "2025")
 
 
-
+print("Winning Team is", winner)
 
 
 
