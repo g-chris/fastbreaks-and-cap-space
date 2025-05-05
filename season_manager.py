@@ -15,6 +15,7 @@ def create_standings_view(db_name):
                 CREATE VIEW {view_name} AS
 SELECT 
     wins.year,
+    winner_team_id as team_id,
     ROW_NUMBER() OVER (
         PARTITION BY wins.conference_name, wins.year 
         ORDER BY wins.wins DESC, wins.win_diff DESC
@@ -170,3 +171,69 @@ def run_playoff_series(db_name, high_seed_id, low_seed_id, current_season):
 
     return series_winning_team_id
 
+def playoff_bracket(db_name, current_season):
+    # Connect to the SQLite database
+    conn = sqlite3.connect(db_name)
+    cursor = conn.cursor()
+
+    # Fetch all rows from the view, ordered by year, conference, and standing
+    cursor.execute(f"""
+    SELECT year, conference_standing, team_id
+    FROM conference_standings
+    WHERE year = {current_season}
+    ORDER BY year, conference_name, conference_standing
+    """)
+    rows = cursor.fetchall()
+
+    # Flatten list of tuples to a simple list
+    team_ids = [row[2] for row in rows]
+
+    # Split and take top 8 from each conference
+    conference1_top8 = team_ids[:8]
+    conference2_top8 = team_ids[15:23]
+
+    #print("Top 8 from Conference 1:", conference1_top8)
+    #print("Top 8 from Conference 2:", conference2_top8)
+
+    conn.close()
+
+    return conference1_top8, conference2_top8
+
+def run_post_season(db_name, current_season):
+    
+    conference1, conference2 = playoff_bracket(db_name,current_season)
+    
+    #Round 1
+    winner_conf1_1_8_seed = run_playoff_series(db_name, conference1[0], conference1[7], current_season)
+    winner_conf1_2_7_seed = run_playoff_series(db_name, conference1[1], conference1[6], current_season)
+    winner_conf1_3_6_seed = run_playoff_series(db_name, conference1[2], conference1[5], current_season)
+    winner_conf1_4_5_seed = run_playoff_series(db_name, conference1[3], conference1[4], current_season)
+
+    winner_conf2_1_8_seed = run_playoff_series(db_name, conference2[0], conference2[7], current_season)
+    winner_conf2_2_7_seed = run_playoff_series(db_name, conference2[1], conference2[6], current_season)
+    winner_conf2_3_6_seed = run_playoff_series(db_name, conference2[2], conference2[5], current_season)
+    winner_conf2_4_5_seed = run_playoff_series(db_name, conference2[3], conference2[4], current_season)
+
+
+    #Round 2
+    winner_conf1_top_bracket = run_playoff_series(db_name, winner_conf1_1_8_seed, winner_conf1_4_5_seed, current_season)
+    winner_conf1_bottom_bracket = run_playoff_series(db_name, winner_conf1_2_7_seed, winner_conf1_3_6_seed , current_season)
+
+    winner_conf2_top_bracket = run_playoff_series(db_name, winner_conf2_1_8_seed, winner_conf2_4_5_seed, current_season)
+    winner_conf2_bottom_bracket = run_playoff_series(db_name, winner_conf2_2_7_seed, winner_conf2_3_6_seed , current_season)
+    
+    #Conference Finals
+    conference1_winner = run_playoff_series(db_name, winner_conf1_top_bracket, winner_conf1_bottom_bracket, current_season)
+    conference2_winner = run_playoff_series(db_name, winner_conf2_top_bracket, winner_conf2_bottom_bracket, current_season)
+
+    #Finals
+    finals_winner = run_playoff_series(db_name, conference1_winner, conference2_winner, current_season)
+
+    return finals_winner
+
+#playoff_bracket("league01.db", "2025")
+#run_post_season("league01.db", "2025")
+winner = run_post_season("league01.db", "2025")
+
+
+print("Winning Team is", winner)
