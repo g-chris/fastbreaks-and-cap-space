@@ -211,7 +211,7 @@ locations = [
     'Detroit',
     'San Francisco',
     'Houston',
-    'Indianapolis',
+    'Indiana',
     'Los Angeles',
     'Seattle',
     'Memphis',
