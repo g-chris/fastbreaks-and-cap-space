@@ -81,19 +81,54 @@ def game_init(league_db_name, salary_cap, starting_year):
     create_season_schedule(league_db_name, starting_year)
     
 
+def run_multi_seasons(league_db_name, salary_cap, starting_year, season_count):
+    
+    game_init(league_db_name, salary_cap, starting_year)
 
-#Start game with default salary_cap (150)]
+    seasons_run = 0
+    current_season = starting_year
 
-game_init(league_db_name, salary_cap, starting_year)
+    while seasons_run < season_count:
 
-season_manager.run_season_schedule(league_db_name, starting_year)
+        season_manager.run_season_schedule(league_db_name, current_season)
 
-season_manager.create_standings_view(league_db_name)
+        season_manager.create_standings_view(league_db_name)
+ 
 
-winner = season_manager.run_post_season("league01.db", "2025")
+        winner = season_manager.run_post_season("league01.db", current_season)
 
 
-print("Winning Team is", winner)
+        print("Winning Team is", winner)
+
+        current_season = current_season + 1
+
+        create_season_schedule(league_db_name, current_season)
+
+        seasons_run = seasons_run + 1
+
+
+
+
+
+def run_single_season(league_db_name, salary_cap, starting_year):
+    #Start game with default salary_cap (150)]
+
+    game_init(league_db_name, salary_cap, starting_year)
+
+    season_manager.run_season_schedule(league_db_name, starting_year)
+
+    season_manager.create_standings_view(league_db_name)
+
+    winner = season_manager.run_post_season("league01.db", starting_year)
+
+
+    print("Winning Team is", winner)
+
+
+#run_single_season(league_db_name, salary_cap, starting_year)
+
+season_count = 100
+run_multi_seasons(league_db_name, salary_cap, starting_year, season_count)
 
 
 

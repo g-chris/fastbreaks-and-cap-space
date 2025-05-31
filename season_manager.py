@@ -14,50 +14,46 @@ def create_standings_view(db_name):
     cursor.execute(f"""
                 CREATE VIEW {view_name} AS
 SELECT 
-    wins.year,
-    winner_team_id as team_id,
+    results.year,
+    results.team_id,
     ROW_NUMBER() OVER (
-        PARTITION BY wins.conference_name, wins.year 
-        ORDER BY wins.wins DESC, wins.win_diff DESC
+        PARTITION BY results.conference_name, results.year 
+        ORDER BY results.wins DESC, results.win_diff DESC
     ) AS conference_standing,
-    wins.conference_name,
-    wins.location_name,
-    wins.team_name,
-    wins.wins,
-    losses.losses,
-    wins.win_diff
+    results.conference_name,
+    results.location_name,
+    results.team_name,
+    results.wins,
+    results.losses,
+    results.win_diff
 FROM (
     SELECT 
-        fact_game_results.season_id AS year,
-        winner_team_id,
-        COUNT(*) AS wins,
+        t.team_id,
+        fgr.season_id AS year,
+        t.location_name,
+        t.team_name,
+        c.conference_name,
+        c.division_name,
+        SUM(CASE WHEN fgr.winner_team_id = t.team_id THEN 1 ELSE 0 END) AS wins,
+        SUM(CASE WHEN fgr.losing_team_id = t.team_id THEN 1 ELSE 0 END) AS losses,
         SUM(
             CASE 
-                WHEN home_score > away_score THEN home_score - away_score
-                ELSE away_score - home_score
+                WHEN fgr.winner_team_id = t.team_id THEN 
+                    CASE WHEN fgr.home_score > fgr.away_score THEN fgr.home_score - fgr.away_score
+                         ELSE fgr.away_score - fgr.home_score
+                    END
+                ELSE 0
             END
-        ) AS win_diff,
-        dim_teams.location_name,
-        dim_teams.team_name,
-        dim_conferences_divisions.conference_name,
-        dim_conferences_divisions.division_name
-    FROM fact_game_results
-    LEFT JOIN dim_teams ON dim_teams.team_id = fact_game_results.winner_team_id
-    LEFT JOIN dim_conferences_divisions ON dim_teams.conf_div_id = dim_conferences_divisions.conf_div_id
-    WHERE fact_game_results.game_day != 'null'
-    GROUP BY year, winner_team_id, location_name, team_name, conference_name, division_name
-) AS wins
-LEFT JOIN (
-    SELECT 
-        fact_game_results.season_id AS year,
-        losing_team_id,
-        COUNT(*) AS losses
-    FROM fact_game_results
-    WHERE fact_game_results.game_day != 'null'
-    GROUP BY year, losing_team_id
-) AS losses
-ON wins.winner_team_id = losses.losing_team_id
-ORDER BY wins.year DESC, wins.conference_name DESC, conference_standing;
+        ) AS win_diff
+    FROM dim_teams t
+    JOIN dim_conferences_divisions c ON t.conf_div_id = c.conf_div_id
+    LEFT JOIN fact_game_results fgr ON (
+        fgr.winner_team_id = t.team_id OR fgr.losing_team_id = t.team_id
+    )
+    WHERE fgr.game_day != 'null'
+    GROUP BY t.team_id, year, t.location_name, t.team_name, c.conference_name, c.division_name
+) AS results
+ORDER BY results.year DESC, results.conference_name DESC, conference_standing;
     """)
     conn.commit()
 
@@ -105,14 +101,15 @@ def simulate_game(game_id, game_day, home_team_id, away_team_id, db_name, curren
     else:
         winner_team_id = away_team_id
         losing_team_id = home_team_id
+
     
     game_data_manager.record_game_results(db_name, game_id, current_season, game_day, home_team_id, away_team_id,
                                           home_score, away_score, winner_team_id, losing_team_id, ot_count)
 
-    if ot_count == 0:
-        print(f"Day {game_day} | Game {game_id}: {away_team_name} {away_score} @ {home_team_name} {home_score}")
-    else:
-        print(f"Day {game_day} | Game {game_id}: {away_team_name} {away_score} @ {home_team_name} {home_score} OT:{ot_count}")
+    # if ot_count == 0:
+    #     print(f"Day {game_day} | Game {game_id}: {away_team_name} {away_score} @ {home_team_name} {home_score}")
+    # else:
+    #     print(f"Day {game_day} | Game {game_id}: {away_team_name} {away_score} @ {home_team_name} {home_score} OT:{ot_count}")
 
 
     return winner_team_id
@@ -149,22 +146,43 @@ def run_playoff_series(db_name, high_seed_id, low_seed_id, current_season):
     low_seed_wins = 0
     high_seed_homecourt = [0,1,4,6]
 
+    # while high_seed_wins < 4 and low_seed_wins < 4:
+    #     game_id = int(str(current_season) + str(high_seed_id) + str('00')+str(low_seed_id) + str(high_seed_wins+low_seed_wins+1))
+    #     game_day = 'null'
+    #     if high_seed_wins + low_seed_wins in high_seed_homecourt:
+    #         game_winner_id = simulate_game(game_id, game_day,high_seed_id, low_seed_id, db_name, current_season)
+    #         if game_winner_id == high_seed_id:
+    #             high_seed_wins = high_seed_wins + 1
+    #         else:
+    #             low_seed_wins = low_seed_wins + 1
+    #     else:
+    #         game_winner_id = simulate_game(game_id, game_day,low_seed_id, high_seed_id, db_name, current_season)
+    #         if game_winner_id == high_seed_id:
+    #             high_seed_wins = high_seed_wins + 1
+    #         else:
+    #             low_seed_wins = low_seed_wins + 1
+
     while high_seed_wins < 4 and low_seed_wins < 4:
-        game_id = int(str(high_seed_id) + str('00')+str(low_seed_id) + str(high_seed_wins+low_seed_wins+1))
+        game_number = high_seed_wins + low_seed_wins + 1
+        game_id = int(f"{current_season}1{high_seed_id:02d}{low_seed_id:02d}{game_number}")
         game_day = 'null'
+
+        # Determine home/away
         if high_seed_wins + low_seed_wins in high_seed_homecourt:
-            game_winner_id = simulate_game(game_id, game_day,high_seed_id, low_seed_id, db_name, current_season)
-            if game_winner_id == high_seed_id:
-                high_seed_wins = high_seed_wins + 1
-            else:
-                low_seed_wins = low_seed_wins + 1
+            home_team_id = high_seed_id
+            away_team_id = low_seed_id
         else:
-            game_winner_id = simulate_game(game_id, game_day,low_seed_id, high_seed_id, db_name, current_season)
-            if game_winner_id == high_seed_id:
-                high_seed_wins = high_seed_wins + 1
-            else:
-                low_seed_wins = low_seed_wins + 1
-    
+            home_team_id = low_seed_id
+            away_team_id = high_seed_id
+
+        # Simulate game and update series state
+        game_winner_id = simulate_game(game_id, game_day, home_team_id, away_team_id, db_name, current_season)
+
+        if game_winner_id == high_seed_id:
+            high_seed_wins += 1
+        else:
+            low_seed_wins += 1
+
     if high_seed_wins > low_seed_wins:
         series_winning_team_id = high_seed_id
     else:
