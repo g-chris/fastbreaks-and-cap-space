@@ -7,6 +7,7 @@ import DATABASE.team_generator as team_generator
 import SIM.draft_manager as draft_manager
 import DATABASE.names as names
 import SIM.season_manager as season_manager
+import timeit
 
 starting_year = 2025
 
@@ -128,7 +129,9 @@ def run_single_season(league_db_name, salary_cap, starting_year):
 #run_single_season(league_db_name, salary_cap, starting_year)
 
 season_count = 1
-run_multi_seasons(league_db_name, salary_cap, starting_year, season_count)
+#run_multi_seasons(league_db_name, salary_cap, starting_year, season_count)
+t = timeit.Timer(lambda: run_multi_seasons(league_db_name, salary_cap, starting_year, season_count))
+print(t.timeit(1))
 
 
 
