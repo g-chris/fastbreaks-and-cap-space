@@ -15,7 +15,7 @@ Current features:
 
 In progress:
 - UI for gameplay (Pygame)
-- Trade Machine logic
+- Trade simulator logic
 - Rival GM AI logic
 
 
