@@ -56,6 +56,7 @@ FROM (
 ORDER BY results.year DESC, results.conference_name DESC, conference_standing;
     """)
     conn.commit()
+    conn.close()
 
 
 def create_team_roster_view(conn, team_id):
@@ -81,6 +82,13 @@ def create_team_roster_view(conn, team_id):
     conn.commit()
 
 def simulate_game(game_id, game_day, home_team_id, away_team_id, db_name, current_season):
+
+
+    import subprocess, os
+    result = subprocess.run(['lsof', '-p', str(os.getpid())], capture_output=True, text=True)
+    db_count = len([line for line in result.stdout.split('\n') if '.db' in line])
+    print(f"Open DB connections: {db_count}")
+
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
 
@@ -94,6 +102,8 @@ def simulate_game(game_id, game_day, home_team_id, away_team_id, db_name, curren
     away_team_name = f"{away_team[0]} {away_team[1]}"
 
     home_score, away_score, ot_count = game_sim_engine.game_sim(home_team_id, away_team_id, conn)
+
+    conn.close()
 
     if home_score > away_score:
         winner_team_id = home_team_id
@@ -113,6 +123,7 @@ def simulate_game(game_id, game_day, home_team_id, away_team_id, db_name, curren
 
 
     return winner_team_id
+
 
 def run_season_schedule(db_name, current_season):
     conn = sqlite3.connect(db_name)

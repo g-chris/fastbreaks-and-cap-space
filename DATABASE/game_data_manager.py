@@ -28,6 +28,7 @@ def create_fact_game_results(db_name):
 
     # Commit the changes
     conn.commit()
+    conn.close()
 
 def record_game_results(db_name, game_id, season_id, game_day,
                         home_team_id, away_team_id, home_score, away_score, winner_team_id, losing_team_id, ot_count):

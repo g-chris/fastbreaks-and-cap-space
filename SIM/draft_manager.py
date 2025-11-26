@@ -30,6 +30,8 @@ def select_random_player_for_team(db_name, team_id):
         """, (team_id, player_id))
         #print(f"Team {team_id} drafted Player {player_id}")
         conn.commit()
+    
+    conn.close()
 
 def select_best_position_player_for_team(db_name, team_id, round_num, num_players_per_team, salary_cap, starting_year):
     # Connect to the database
@@ -178,6 +180,8 @@ def select_best_position_player_for_team(db_name, team_id, round_num, num_player
         #Insert Draft pick into dim_player_transactions
         transaction_date = f"{starting_year}-000"
         data_manager.insert_player_transaction(db_name, player_id, team_id, "DRAFT",transaction_date)
+
+    conn.close()
 
 
 

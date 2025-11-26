@@ -377,4 +377,6 @@ def drop_table(db_name, table_name):
     # Commit the changes
     conn.commit()
 
+    conn.close()
+
     

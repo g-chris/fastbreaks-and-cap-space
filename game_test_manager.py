@@ -8,6 +8,7 @@ import SIM.draft_manager as draft_manager
 import DATABASE.names as names
 import SIM.season_manager as season_manager
 import timeit
+import resource
 
 starting_year = 2025
 
@@ -62,7 +63,7 @@ def initial_draft(league_db_name, salary_cap, starting_year):
 
 def create_season_schedule(league_db_name, season_number):
     
-    with open('schedule _output.csv','r') as csv_schedule:
+    with open('schedule_output.csv','r') as csv_schedule:
         #Skip header line
         csv_schedule.__next__()
         schedule=[tuple(row) for row in csv.reader(csv_schedule)]
@@ -77,6 +78,10 @@ def game_init(league_db_name, salary_cap, starting_year):
 
     #Step 1 - Draft the players to all 30 teams
     initial_draft(league_db_name, salary_cap, starting_year)
+
+    #Debugging too many open files error
+    soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
+    print(f"File descriptor limits: soft={soft}, hard={hard}")
 
     #Step 2 - Create the season schedule where 2025 is the season number (first season)
     create_season_schedule(league_db_name, starting_year)
