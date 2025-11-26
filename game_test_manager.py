@@ -79,10 +79,6 @@ def game_init(league_db_name, salary_cap, starting_year):
     #Step 1 - Draft the players to all 30 teams
     initial_draft(league_db_name, salary_cap, starting_year)
 
-    #Debugging too many open files error
-    soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
-    print(f"File descriptor limits: soft={soft}, hard={hard}")
-
     #Step 2 - Create the season schedule where 2025 is the season number (first season)
     create_season_schedule(league_db_name, starting_year)
     
