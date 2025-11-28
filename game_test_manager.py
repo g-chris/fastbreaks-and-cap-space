@@ -36,6 +36,8 @@ def create_players_and_teams(league_db_name, player_count, team_count):
     data_manager.drop_table(league_db_name, "dim_player_transactions")
     #Drop game results table
     data_manager.drop_table(league_db_name, "fact_game_results")
+    #Drop player game stats table
+    data_manager.drop_table(league_db_name, "fact_player_game_stats")
 
 
     #Create players and teams
@@ -55,6 +57,8 @@ def create_players_and_teams(league_db_name, player_count, team_count):
     data_manager.create_player_transaction_table(league_db_name)
     #Create game results table
     game_data_manager.create_fact_game_results(league_db_name)
+    #Create player game stats table
+    game_data_manager.create_fact_player_game_stats(league_db_name)
     
 #Assign players to all teams 
 def initial_draft(league_db_name, salary_cap, starting_year):
@@ -82,7 +86,6 @@ def game_init(league_db_name, salary_cap, starting_year):
     #Step 2 - Create the season schedule where 2025 is the season number (first season)
     create_season_schedule(league_db_name, starting_year)
     
-
 def run_multi_seasons(league_db_name, salary_cap, starting_year, season_count):
     
     game_init(league_db_name, salary_cap, starting_year)
@@ -107,10 +110,6 @@ def run_multi_seasons(league_db_name, salary_cap, starting_year, season_count):
         create_season_schedule(league_db_name, current_season)
 
         seasons_run = seasons_run + 1
-
-
-
-
 
 def run_single_season(league_db_name, salary_cap, starting_year):
     #Start game with default salary_cap (150)]

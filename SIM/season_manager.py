@@ -1,5 +1,5 @@
 import sqlite3
-import SIM.game_sim_engine as game_sim_engine
+import SIM.game_sim_engine_improved as game_sim_engine
 import DATABASE.game_data_manager as game_data_manager
 
 def create_standings_view(db_name):
@@ -58,7 +58,6 @@ ORDER BY results.year DESC, results.conference_name DESC, conference_standing;
     conn.commit()
     conn.close()
 
-
 def create_team_roster_view(conn, team_id):
     cursor = conn.cursor()
     view_name = f"team_{team_id}_roster"
@@ -74,7 +73,13 @@ def create_team_roster_view(conn, team_id):
             p.first_name,
             p.last_name,
             p.position,
-            p.overall_score
+            p.overall_score,
+            p.attribute_strength,
+            p.attribute_dexterity,
+            p.attribute_constitution,
+            p.attribute_intelligence,
+            p.attribute_shooting,
+            p.attribute_defense
         FROM dim_player_transactions t
         JOIN dim_players p ON t.player_id = p.player_id
         WHERE t.team_id = {team_id} AND t.etl_current_flag = 1
@@ -95,7 +100,9 @@ def simulate_game(game_id, game_day, home_team_id, away_team_id, db_name, curren
     home_team_name = f"{home_team[0]} {home_team[1]}"
     away_team_name = f"{away_team[0]} {away_team[1]}"
 
-    home_score, away_score, ot_count = game_sim_engine.game_sim(home_team_id, away_team_id, conn)
+    # Simulate game with player stats (returns 6 values)
+    home_score, away_score, ot_count, home_stats, away_stats, possession_log = \
+        game_sim_engine.simulate_game_with_player_stats(home_team_id, away_team_id, conn)
 
     conn.close()
 
@@ -107,8 +114,15 @@ def simulate_game(game_id, game_day, home_team_id, away_team_id, db_name, curren
         losing_team_id = home_team_id
 
     
-    game_data_manager.record_game_results(db_name, game_id, current_season, game_day, home_team_id, away_team_id,
-                                          home_score, away_score, winner_team_id, losing_team_id, ot_count)
+    # Record game results AND player stats
+    game_data_manager.record_game_with_player_stats(
+        db_name, game_id, current_season, game_day, 
+        home_team_id, away_team_id,
+        home_score, away_score, 
+        winner_team_id, losing_team_id, 
+        ot_count,
+        home_stats, away_stats
+    )
 
     # if ot_count == 0:
     #     print(f"Day {game_day} | Game {game_id}: {away_team_name} {away_score} @ {home_team_name} {home_score}")
@@ -117,7 +131,6 @@ def simulate_game(game_id, game_day, home_team_id, away_team_id, db_name, curren
 
 
     return winner_team_id
-
 
 def run_season_schedule(db_name, current_season):
     conn = sqlite3.connect(db_name)
