@@ -24,6 +24,7 @@ def get_team_roster_with_attributes(conn, team_id):
             player_id,
             first_name,
             last_name,
+            overall_score,
             attribute_strength,
             attribute_dexterity,
             attribute_constitution,
@@ -39,56 +40,135 @@ def get_team_roster_with_attributes(conn, team_id):
     return players
 
 
+def get_rotation_players(team_roster, rotation_size=8):
+    """
+    Get the active rotation players (top players by overall_score)
+    This represents starters + key bench players who actually play meaningful minutes
+    
+    Parameters:
+        team_roster: Full roster list of player dicts
+        rotation_size: Number of players in rotation (default 8 = 5 starters + 3 bench)
+    
+    Returns: List of top rotation_size players by overall_score
+    """
+    # Debug: Check what keys are available
+    if team_roster and len(team_roster) > 0:
+        available_keys = team_roster[0].keys()
+        # Try to find the overall score key
+        if 'overall_score' in available_keys:
+            score_key = 'overall_score'
+        elif 'player_overall_score' in available_keys:
+            score_key = 'player_overall_score'
+        elif 'overall' in available_keys:
+            score_key = 'overall'
+        else:
+            # Fallback: calculate overall from attributes
+            print(f"Warning: overall_score not found. Available keys: {list(available_keys)}")
+            # Use sum of all attributes as a proxy for overall rating
+            return sorted(team_roster, 
+                         key=lambda x: (x.get('attribute_shooting', 0) + 
+                                       x.get('attribute_dexterity', 0) + 
+                                       x.get('attribute_intelligence', 0) + 
+                                       x.get('attribute_defense', 0) + 
+                                       x.get('attribute_strength', 0) + 
+                                       x.get('attribute_constitution', 0)), 
+                         reverse=True)[:rotation_size]
+        
+        return sorted(team_roster, key=lambda x: x[score_key], reverse=True)[:rotation_size]
+    
+    return team_roster[:rotation_size]
+
+
 def calculate_team_ratings(team_roster):
     """
     Calculate offensive and defensive ratings for a team
+    Uses only rotation players (top 8) for realistic calculations
     Returns: (offensive_rating, defensive_rating)
     """
+    # Use only rotation players for team ratings
+    rotation = get_rotation_players(team_roster)
+    
     # Offensive rating: Shooting + Dexterity + Intelligence
     offensive_rating = sum(
         p['attribute_shooting'] + p['attribute_dexterity'] + p['attribute_intelligence']
-        for p in team_roster
+        for p in rotation
     )
     
     # Defensive rating: Defense + Constitution + Strength
     defensive_rating = sum(
         p['attribute_defense'] + p['attribute_constitution'] + p['attribute_strength']
-        for p in team_roster
+        for p in rotation
     )
     
     return offensive_rating, defensive_rating
 
 
 def get_scorer_weights(team_roster):
-    """Players with high SHOOTING get ball more often for scoring"""
-    return {
-        p['player_id']: max(1, p['attribute_shooting']) 
-        for p in team_roster
-    }
+    """
+    Players with high SHOOTING get ball more often for scoring
+    Rotation players (top 8) get much higher weight than deep bench
+    """
+    rotation = get_rotation_players(team_roster)
+    rotation_ids = {p['player_id'] for p in rotation}
+    
+    weights = {}
+    for p in team_roster:
+        base_weight = max(1, p['attribute_shooting'])
+        # Rotation players get full weight, bench players get 10% weight
+        weights[p['player_id']] = base_weight if p['player_id'] in rotation_ids else base_weight * 0.1
+    
+    return weights
 
 
 def get_rebounder_weights(team_roster):
-    """Players with high STRENGTH + CONSTITUTION get more rebounds"""
-    return {
-        p['player_id']: max(1, p['attribute_strength'] + p['attribute_constitution']) 
-        for p in team_roster
-    }
+    """
+    Players with high STRENGTH + CONSTITUTION get more rebounds
+    Rotation players get much higher weight than deep bench
+    """
+    rotation = get_rotation_players(team_roster)
+    rotation_ids = {p['player_id'] for p in rotation}
+    
+    weights = {}
+    for p in team_roster:
+        base_weight = max(1, p['attribute_strength'] + p['attribute_constitution'])
+        # Rotation players get full weight, bench players get 10% weight
+        weights[p['player_id']] = base_weight if p['player_id'] in rotation_ids else base_weight * 0.1
+    
+    return weights
 
 
 def get_assist_weights(team_roster):
-    """Players with high INTELLIGENCE + DEXTERITY distribute ball better"""
-    return {
-        p['player_id']: max(1, p['attribute_intelligence'] + p['attribute_dexterity']) 
-        for p in team_roster
-    }
+    """
+    Players with high INTELLIGENCE + DEXTERITY distribute ball better
+    Rotation players get much higher weight than deep bench
+    """
+    rotation = get_rotation_players(team_roster)
+    rotation_ids = {p['player_id'] for p in rotation}
+    
+    weights = {}
+    for p in team_roster:
+        base_weight = max(1, p['attribute_intelligence'] + p['attribute_dexterity'])
+        # Rotation players get full weight, bench players get 10% weight
+        weights[p['player_id']] = base_weight if p['player_id'] in rotation_ids else base_weight * 0.1
+    
+    return weights
 
 
 def get_defender_weights(team_roster):
-    """Players with high DEFENSE get more steals/blocks"""
-    return {
-        p['player_id']: max(1, p['attribute_defense']) 
-        for p in team_roster
-    }
+    """
+    Players with high DEFENSE get more steals/blocks
+    Rotation players get much higher weight than deep bench
+    """
+    rotation = get_rotation_players(team_roster)
+    rotation_ids = {p['player_id'] for p in rotation}
+    
+    weights = {}
+    for p in team_roster:
+        base_weight = max(1, p['attribute_defense'])
+        # Rotation players get full weight, bench players get 10% weight
+        weights[p['player_id']] = base_weight if p['player_id'] in rotation_ids else base_weight * 0.1
+    
+    return weights
 
 
 def select_weighted_player(weights):
@@ -141,12 +221,28 @@ def simulate_possession(offense_roster, defense_roster, offense_rating, defense_
     Updates game_stats dict in place with individual player stats
     """
     # Calculate modifiers (0-10 scale)
-    offensive_modifier = min(10, offense_rating // 120)
-    defensive_modifier = min(10, defense_rating // 120)
+    # Using ceiling division so team quality differences matter more
+    import math
+    offensive_modifier = min(10, math.ceil(offense_rating / 30))
+    defensive_modifier = min(10, math.ceil(defense_rating / 30))
+    
+    # DEBUG: Print first 3 possessions with full details
+    if not hasattr(simulate_possession, 'debug_poss_count'):
+        simulate_possession.debug_poss_count = 0
+    if simulate_possession.debug_poss_count < 3:
+        print(f"\nDEBUG Possession {simulate_possession.debug_poss_count + 1}:")
+        print(f"  Offense Rating: {offense_rating} → Modifier: {offensive_modifier}")
+        print(f"  Defense Rating: {defense_rating} → Modifier: {defensive_modifier}")
     
     # Roll for possession outcome
     offense_roll = roll_d6() + offensive_modifier
     defense_roll = roll_d6() + defensive_modifier
+    
+    if simulate_possession.debug_poss_count < 3:
+        print(f"  Offense Roll: {offense_roll} (d6 + {offensive_modifier})")
+        print(f"  Defense Roll: {defense_roll} (d6 + {defensive_modifier})")
+        print(f"  Outcome: ", end="")
+        simulate_possession.debug_poss_count += 1
     
     possession_result = {
         'offense_team': 'offense',
@@ -160,6 +256,8 @@ def simulate_possession(offense_roster, defense_roster, offense_rating, defense_
     # Determine possession outcome
     if defense_roll > offense_roll + 2:
         # TURNOVER - Defensive player gets steal
+        if hasattr(simulate_possession, 'debug_poss_count') and simulate_possession.debug_poss_count <= 3:
+            print("TURNOVER")
         possession_result['outcome'] = 'turnover'
         possession_result['points'] = 0
         
@@ -174,6 +272,8 @@ def simulate_possession(offense_roster, defense_roster, offense_rating, defense_
         
     elif defense_roll > offense_roll:
         # TOUGH SHOT - Lower shooting percentage
+        if hasattr(simulate_possession, 'debug_poss_count') and simulate_possession.debug_poss_count <= 3:
+            print("TOUGH SHOT")
         possession_result['outcome'] = 'tough_shot'
         points = simulate_shot_attempt(offense_roster, defense_roster, game_stats, 
                                        shot_quality='tough', possession_result=possession_result)
@@ -186,6 +286,9 @@ def simulate_possession(offense_roster, defense_roster, offense_rating, defense_
             shot_quality = 'great'
         else:
             shot_quality = 'normal'
+        
+        if hasattr(simulate_possession, 'debug_poss_count') and simulate_possession.debug_poss_count <= 3:
+            print(f"{shot_quality.upper()} SHOT (margin: {margin})")
         
         possession_result['outcome'] = f'{shot_quality}_shot'
         points = simulate_shot_attempt(offense_roster, defense_roster, game_stats, 
@@ -205,29 +308,42 @@ def simulate_shot_attempt(offense_roster, defense_roster, game_stats, shot_quali
     """
     # Determine shot type based on intelligence (3pt vs 2pt decision)
     # Higher intelligence teams take more 3-pointers
-    avg_intelligence = sum(p['attribute_intelligence'] for p in offense_roster) / len(offense_roster)
-    shot_selection_roll = roll_d6() + (avg_intelligence / 3)  # Intelligence modifier: ~3-5 for avg teams
+    # Use only rotation players for this calculation
+    rotation = get_rotation_players(offense_roster)
+    avg_intelligence = sum(p['attribute_intelligence'] for p in rotation) / len(rotation)
+    shot_selection_roll = roll_d6() + (avg_intelligence / 3)  # Intelligence modifier: ~2-3 for avg teams
     
-    # About 30-35% of shots should be 3-pointers (threshold of 10)
-    # With d6 (1-6) + modifier (3-5), you get 4-11, so ~40% will be >= 10
-    is_three_pointer = shot_selection_roll >= 10
+    # DEBUG: Print first 5 shot selection attempts
+    if not hasattr(simulate_shot_attempt, 'debug_count'):
+        simulate_shot_attempt.debug_count = 0
+    if simulate_shot_attempt.debug_count < 5:
+        print(f"DEBUG Shot {simulate_shot_attempt.debug_count + 1}: avg_intel={avg_intelligence:.1f}, "
+              f"modifier={avg_intelligence/3:.1f}, roll={shot_selection_roll:.1f}, "
+              f"threshold=6, is_3pt={shot_selection_roll >= 6}")
+        simulate_shot_attempt.debug_count += 1
+    
+    # About 35-45% of shots should be 3-pointers (threshold of 6)
+    # With d6 (1-6) + modifier (2-3), you get 3-9, so ~50-60% will be >= 6
+    is_three_pointer = shot_selection_roll >= 6
     
     # Select shooter (weighted by shooting attribute)
     shooter_id = select_weighted_player(get_scorer_weights(offense_roster))
     shooter = next(p for p in offense_roster if p['player_id'] == shooter_id)
     
-    # Calculate shooting modifier
-    team_shooting_total = sum(p['attribute_shooting'] for p in offense_roster)
-    shooting_mod = team_shooting_total / 50
+    # Calculate shooting modifier using rotation players
+    rotation = get_rotation_players(offense_roster)
+    team_shooting_total = sum(p['attribute_shooting'] for p in rotation)
+    shooting_mod = team_shooting_total / 12  # Increased from /20 to /12 for better shooting
     
     # Roll for shot success
     shot_roll = roll_d6() + shooting_mod
     
     # Determine thresholds based on shot quality and type
+    # Adjusted for more realistic NBA percentages: ~52% 2PT, ~35% 3PT
     thresholds = {
-        'great': {'2pt': 4, '3pt': 6},
-        'normal': {'2pt': 5, '3pt': 8},
-        'tough': {'2pt': 7, '3pt': 10}
+        'great': {'2pt': 5, '3pt': 6},    # Great shots: easier to make
+        'normal': {'2pt': 7, '3pt': 8},   # Normal shots: moderate difficulty
+        'tough': {'2pt': 9, '3pt': 10}    # Tough shots: harder to make
     }
     
     shot_type = '3pt' if is_three_pointer else '2pt'
@@ -299,7 +415,7 @@ def simulate_shot_attempt(offense_roster, defense_roster, game_stats, shot_quali
         return 0
 
 
-def simulate_game_with_player_stats(home_team_id, away_team_id, conn, home_court_advantage=2):
+def simulate_game_with_player_stats(home_team_id, away_team_id, conn, home_court_advantage=0):
     """
     Main game simulation function with full player stat tracking
     
@@ -307,7 +423,7 @@ def simulate_game_with_player_stats(home_team_id, away_team_id, conn, home_court
         home_team_id: ID of home team
         away_team_id: ID of away team
         conn: Database connection
-        home_court_advantage: Bonus added to home team's offensive rating (default: 2)
+        home_court_advantage: Net bonus for home team (default: 0 = neutral court)
     
     Returns: (home_score, away_score, ot_count, home_stats, away_stats, possession_log)
     """
@@ -319,8 +435,14 @@ def simulate_game_with_player_stats(home_team_id, away_team_id, conn, home_court
     home_off_rating, home_def_rating = calculate_team_ratings(home_roster)
     away_off_rating, away_def_rating = calculate_team_ratings(away_roster)
     
-    # Apply home court advantage to home team's offense
-    home_off_rating += home_court_advantage * 10  # Multiply by 10 to match the 0-10 modifier scale
+    # Apply base offensive boost to both teams (simulates modern offensive-friendly rules)
+    base_offensive_boost = 10  # +1 effective modifier
+    home_off_rating += base_offensive_boost
+    away_off_rating += base_offensive_boost
+    
+    # Apply home court advantage to home team only (net advantage)
+    home_court_boost = home_court_advantage * 10
+    home_off_rating += home_court_boost
     
     # Initialize player stats dictionaries
     home_stats = {p['player_id']: initialize_player_stats() for p in home_roster}
@@ -403,7 +525,7 @@ def simulate_game_with_player_stats(home_team_id, away_team_id, conn, home_court
     return home_score, away_score, ot_count, home_stats, away_stats, possession_log
 
 
-def game_sim(home_team_id, away_team_id, conn, home_court_advantage=2):
+def game_sim(home_team_id, away_team_id, conn, home_court_advantage=0):
     """
     Wrapper function to maintain compatibility with existing code
     
@@ -411,7 +533,7 @@ def game_sim(home_team_id, away_team_id, conn, home_court_advantage=2):
         home_team_id: ID of home team
         away_team_id: ID of away team  
         conn: Database connection
-        home_court_advantage: Bonus for home team (default: 2)
+        home_court_advantage: Net bonus for home team (default: 0 = neutral court)
     
     Returns: (home_score, away_score, ot_count)
     """
@@ -429,11 +551,11 @@ if __name__ == "__main__":
     try:
         conn = sqlite3.connect(test_db)
         
-        # Test with team IDs 1 and 2, with home court advantage of 2
+        # Test with team IDs 1 and 2, neutral court
         print("Simulating game between Team 1 (home) and Team 2 (away)...")
-        print("Home court advantage: +2 to home team offense")
+        print("Neutral court (home court advantage = 0)")
         home_score, away_score, ot_count, home_stats, away_stats, log = \
-            simulate_game_with_player_stats(1, 2, conn, home_court_advantage=2)
+            simulate_game_with_player_stats(1, 2, conn, home_court_advantage=0)
         
         print(f"\nFinal Score: Team 1: {home_score}, Team 2: {away_score}")
         if ot_count > 0:
